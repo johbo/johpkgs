@@ -1,4 +1,4 @@
-with import <nixpkgs> {};
+{stdenv, fetchurl, curl, dmd, gcc, unzip}:
 
 stdenv.mkDerivation {
   name = "dub-0.9.22";
@@ -25,7 +25,7 @@ stdenv.mkDerivation {
   meta = with stdenv.lib; {
     description = "DUB - Build tool for D projects";
     homepage = http://code.dlang.org/;
-    license = "TODO";
+    license = stdenv.lib.licenses.mit;
     platforms = platforms.unix;
   };
 }
