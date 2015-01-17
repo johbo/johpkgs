@@ -13,6 +13,9 @@ stdenv.mkDerivation {
   propagatedBuildInputs = [ gcc dmd ];
 
   buildPhase = ''
+      # Avoid that the version file is overwritten
+      substituteInPlace build.sh \
+          --replace source/dub/version_.d /dev/null
       ./build.sh
   '';
 
