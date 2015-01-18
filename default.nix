@@ -1,11 +1,20 @@
-with import <nixpkgs> {};
+{ system ? builtins.currentSystem }:
 
-rec {
 
-  dub = callPackage ./dub { };
+let
 
-  emacsPackages = {
-    d = callPackage ./emacs-modes/d { };
+  pkgs = import <nixpkgs> {inherit system; };
+
+  callPackage = pkgs.lib.callPackageWith (pkgs // self);
+
+  self = rec {
+
+    dub = callPackage ./dub { };
+
+    emacsPackages = {
+      d = callPackage ./emacs-modes/d { };
+    };
+
   };
-
-}
+in
+self
