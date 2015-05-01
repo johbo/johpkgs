@@ -32,24 +32,27 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq font-lock-maximum-decoration t)
 (setq inhibit-startup-message t)
+(setq ns-pop-up-frames nil)
 (setq search-highlight t)
 (setq x-select-enable-clipboard t)
 ;(setq-default show-trailing-whitespace t)
 
 
-;; Load nix mode when needed
+
+;; Register D mode
+(autoload 'd-mode "d-mode" "Major mode for editing D source code." t)
+(push '("\\.d$" . d-mode) auto-mode-alist)
+
+
+;; Register nix mode
 (autoload 'nix-mode "nix-mode" "Major mode for editing Nix expressions." t)
 (push '("\\.nix\\'" . nix-mode) auto-mode-alist)
 (push '("\\.nix.in\\'" . nix-mode) auto-mode-alist)
 
 
 ;; Register YAML mode
-(require 'yaml-mode)
+(autoload 'yaml-mode "yaml-mode" "Major mode for editing YAML files." t)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-
-
-;; open new files in same frame
-(setq ns-pop-up-frames nil)
 
 
 ;; Set up the package repos for emacs
