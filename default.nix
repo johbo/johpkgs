@@ -9,6 +9,8 @@ let
 
   self = rec {
 
+    configuration = callPackage ./config { };
+
     dub = callPackage ./dub { };
 
     emacs = pkgs.lib.overrideDerivation pkgs.emacs (oldAttrs: {
