@@ -8,6 +8,7 @@ stdenv.mkDerivation {
   '';
   installPhase = ''
     mkdir $out
+    cp -rv bin $out/bin
     cp -rv etc $out/etc
   '';
 }
