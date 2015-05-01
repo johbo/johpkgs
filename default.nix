@@ -19,8 +19,8 @@ let
         "--with-ns --disable-ns-self-contained"
       ];
 
+      # Copy over the generated Emacs.app data
       postInstall = oldAttrs.postInstall + pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
-        # Copy over the generated Emacs.app data
         mkdir -p $out/Applications
         cp -r nextstep/Emacs.app $out/Applications
       '';
@@ -29,6 +29,7 @@ let
 
     emacsPackages = {
       d = callPackage ./emacs-modes/d { };
+      yaml = callPackage ./emacs-modes/yaml { };
     };
 
   };

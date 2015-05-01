@@ -43,6 +43,11 @@
 (push '("\\.nix.in\\'" . nix-mode) auto-mode-alist)
 
 
+;; Register YAML mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
+
 ;; open new files in same frame
 (setq ns-pop-up-frames nil)
 
