@@ -10,5 +10,6 @@ stdenv.mkDerivation {
     mkdir $out
     cp -rv bin $out/bin
     cp -rv etc $out/etc
+    cp -rv Library $out/Library
   '';
 }

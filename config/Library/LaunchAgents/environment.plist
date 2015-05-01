@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+
+<!--+
+    | This tries its best to inject an updated PATH environment variable
+    | so that applications started out of mission control will have this
+    | path variable set.
+    +-->
+
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>my.startup</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>sh</string>
+    <string>-c</string>
+    <string>
+      export PATH=""
+      eval `/usr/libexec/path_helper -s`
+      export PATH=$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin:$HOME/bin:$PATH
+      launchctl setenv PATH $PATH
+      osascript -e 'tell app "Dock" to quit'
+    </string>
+
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+</dict>
+</plist>
