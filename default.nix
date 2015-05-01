@@ -9,7 +9,7 @@ let
 
   self = rec {
 
-    configuration = callPackage ./config { };
+    config = callPackage ./config { };
 
     dub = callPackage ./dub { };
 
