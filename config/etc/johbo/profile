@@ -1,0 +1,18 @@
+
+#
+# Dispatch mainly to ~/.nix-profile
+#
+
+# Update the environment with nix related things
+NIX_LINK=$HOME/.nix-profile
+
+if [ -e $NIX_LINK/etc/profile.d/nix.sh ]
+then
+    . $NIX_LINK/etc/profile.d/nix.sh
+fi
+
+# Dispatch to nix managed configuration files
+if [ -e $NIX_LINK/etc/johbo/bootstrap.sh ]
+then
+    source $NIX_LINK/etc/johbo/bootstrap.sh
+fi
