@@ -16,6 +16,13 @@ let
       configureFlags = oldAttrs.configureFlags ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
         "--with-ns --disable-ns-self-contained"
       ];
+
+      postInstall = oldAttrs.postInstall + pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
+        # Copy over the generated Emacs.app data
+        mkdir -p $out/Applications
+        cp -r nextstep/Emacs.app $out/Applications
+      '';
+
     });
 
     emacsPackages = {
