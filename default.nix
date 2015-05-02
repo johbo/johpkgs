@@ -11,6 +11,29 @@ let
 
     config = callPackage ./config { };
 
+    common = pkgs.buildEnv {
+      name = "common";
+      paths = [
+        config
+
+        emacs
+        emacsPackages.d
+        emacsPackages.yaml
+
+        pkgs.aspell
+        pkgs.aspellDicts.de
+        pkgs.aspellDicts.en
+
+        pkgs.coreutils
+        pkgs.git
+        pkgs.mercurial
+        pkgs.tree
+
+        pkgs.nix-repl
+        pkgs.nix-serve
+      ];
+    };
+
     dub = callPackage ./dub { };
 
     emacs = pkgs.lib.overrideDerivation pkgs.emacs (oldAttrs: {
