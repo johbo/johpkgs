@@ -17,6 +17,15 @@ then
 fi
 
 
+# Language settings, partially important for Python on Darwin
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+
+# Postgres development setup
+# TODO: Change to something which does not have "tmp" in it
+export PGDATA=$HOME/tmp/pgdata
+
 
 # Prompt tweaks
 
