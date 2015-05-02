@@ -1,0 +1,60 @@
+
+[ui]
+username = Johannes Bornhold <johannes@bornhold.name>
+ignore = ~/.nix-profile/etc/johbo/hgignore_default
+
+
+[diff]
+git = 1
+showfunc = 1
+unified = 8
+
+
+[alias]
+lint = !git-lint $@
+
+
+[extensions]
+children =
+progress =
+color =
+hgext.graphlog =
+pager =
+hgext.convert =
+mq =
+purge =
+transplant =
+bookmarks =
+hgext.churn =
+#largefiles =
+rebase =
+record =
+histedit =
+shelve =
+
+
+[progress]
+delay = 1.5
+
+
+[bookmarks]
+track.current = True
+
+
+[color]
+status.modified = green
+status.removed = red bold
+status.added = cyan bold
+status.unknown = white bold
+custom.rev = yellow
+custom.author = bold
+custom.book = green
+custom.branch = red bold underline
+custom.date = underline
+
+changeset.draft = yellow
+changeset.public = green
+
+
+[pager]
+pager = LESS='FSRX' less

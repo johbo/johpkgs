@@ -1,0 +1,43 @@
+
+syntax: regexp
+
+# Mercurial things
+\.orig$
+
+# workflow
+^env../
+# e.g. env27.server
+^env..\..+/
+^local_.*$
+^out$
+^err$
+^tmp/
+
+
+# Emacs things
+(^|/)\.\#
+(^|/)\#.*\#$
+~$
+
+
+# PyDev
+^\.project$
+^\.pydevproject$
+^\.settings/
+
+
+# Python stuff
+\.pyc$
+\.egg-info/
+
+# pytest
+^\.cache/
+\.coverage$
+htmlcov/
+
+# tox
+^\.tox/
+
+
+# Mac OS stuff
+\.DS_Store$

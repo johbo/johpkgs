@@ -1,0 +1,18 @@
+[core]
+  excludesfile = /Users/johannes/.nix-profile/etc/johbo/gitignore_default
+
+[user]
+  name = Johannes Bornhold
+  email = johannes@bornhold.name
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  grep = auto
+
+[merge]
+  defaultToUpstream = true
+
+[push]
+  default = simple

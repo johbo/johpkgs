@@ -1,0 +1,37 @@
+
+.DS_Store
+/.project
+/.pydevproject
+/.Python
+/.settings/
+
+pyvenv.cfg
+/bin/
+/include/
+/lib/
+/man/
+/share/
+/src-ext/
+/tmp/
+
+# Python development
+*.pyc
+.coverage
+.noseids
+env/
+env?.?/
+
+# Avoid egg-info stuff to be in the repository
+*.egg-info/
+
+# Emacs related
+*~
+\#*#
+.#*
+.ropeproject/
+
+# Vagrant
+/.vagrant/
+
+# Other tools
+Guardfile

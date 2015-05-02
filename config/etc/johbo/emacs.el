@@ -32,6 +32,7 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq font-lock-maximum-decoration t)
 (setq inhibit-startup-message t)
+(setq-default ispell-program-name "aspell")
 (setq ns-pop-up-frames nil)
 (setq search-highlight t)
 (setq x-select-enable-clipboard t)
