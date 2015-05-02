@@ -11,8 +11,9 @@ let
 
     config = callPackage ./config { };
 
-    common = pkgs.buildEnv {
-      name = "common";
+    johbo-common = pkgs.buildEnv {
+      name = "johbo-common";
+
       paths = [
         config
 
@@ -27,11 +28,23 @@ let
         pkgs.coreutils
         pkgs.git
         pkgs.mercurial
+        pkgs.screen
+        pkgs.tmux
         pkgs.tree
+        pkgs.watchman
+        # pkgs.xournal
 
         pkgs.nix-repl
         pkgs.nix-serve
+
+        pkgs.pythonDocs.html.python27
+
       ];
+
+      passthru = {
+        # Avoiding conflicts by using a low priority for the collection
+        meta.priority = 10;
+      };
     };
 
     dub = callPackage ./dub { };
