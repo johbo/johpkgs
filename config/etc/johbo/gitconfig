@@ -1,5 +1,5 @@
 [core]
-  excludesfile = /Users/johannes/.nix-profile/etc/johbo/gitignore_default
+  excludesfile = ~/.nix-profile/etc/johbo/gitignore_default
 
 [user]
   name = Johannes Bornhold
