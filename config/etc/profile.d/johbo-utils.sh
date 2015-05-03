@@ -10,16 +10,37 @@
 
 
 # Emacs shortcuts
-alias emacs='$VISUAL -c'
-alias ee='$EDITOR'
-alias eo='$VISUAL -n'
+function emacs() {
+    $VISUAL -c $@
+}
+
+function ee() {
+    $EDITOR $@
+}
+
+function eo() {
+    $VISUAL -n $@
+}
+
+export -f emacs ee eo
 
 
 
 # mercurial version control
-alias hgcl='hg log -r "reverse(ancestors(.))" -G'
-alias hgud='hg up -r `hg id -r default -i upstream`'
-alias hgus='hg up -r `hg id -r stable -i upstream`'
+function hgcl() {
+    commit_id=${1:-.}
+    hg log -r "reverse(ancestors($commit_id))" -G
+}
+
+function hgud() {
+    hg up -r `hg id -r default -i upstream`
+}
+
+function hgus() {
+    hg up -r `hg id -r stable -i upstream`
+}
+
+export -f hgcl hgud hgus
 
 
 # git version control
@@ -31,11 +52,16 @@ alias gci='git commit'
 alias gca='git commit -a'
 alias gdi='git diff'
 alias gpr='git pull --rebase'
-alias gst='git status'
+
+function gst() {
+    git status
+}
 
 alias gfu='git fetch -v upstream; git fetch -v origin'
 
 alias gserve='echo "on port 9418"; git daemon --reuseaddr --base-path=. --export-all --verbose'
+
+export -f gbl gst
 
 
 
