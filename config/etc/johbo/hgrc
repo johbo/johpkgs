@@ -2,6 +2,7 @@
 [ui]
 username = Johannes Bornhold <johannes@bornhold.name>
 ignore = ~/.nix-profile/etc/johbo/hgignore_default
+merge = internal:merge
 
 
 [diff]
