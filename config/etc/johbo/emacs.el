@@ -13,6 +13,8 @@
   '(column-number-mode t)
   '(custom-enabled-themes (quote (tango-dark)))
   '(display-time-mode t)
+  '(feature-indent-level 4)
+  '(feature-indent-offset 4)
   '(fill-column 79)
   '(indent-tabs-mode nil)
   '(js2-mode-escape-quotes nil)
