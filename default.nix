@@ -9,13 +9,13 @@ let
 
   self = rec {
 
-    config = callPackage ./config { };
+    johbo-config = callPackage ./config { };
 
     johbo-common = pkgs.buildEnv {
       name = "johbo-common";
 
       paths = [
-        config
+        johbo-config
 
         emacs
         emacsPackages.d
