@@ -37,6 +37,10 @@ let
         pkgs.nix-repl
         pkgs.nix-serve
 
+        # TODO: priority
+        # pkgs.python2
+        pkgs.python2Packages.pip
+
         pkgs.python3
         pkgs.python3Packages.hovercraft
 
