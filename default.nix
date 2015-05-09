@@ -37,6 +37,7 @@ let
         pkgs.nix-repl
         pkgs.nix-serve
 
+        pkgs.python3Packages.hovercraft
         pkgs.pythonDocs.html.python27
 
       ];
