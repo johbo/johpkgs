@@ -36,6 +36,7 @@ let
 
         pkgs.nix-repl
         pkgs.nix-serve
+        pkgs.nixops
 
         # TODO: priority
         # pkgs.python2
