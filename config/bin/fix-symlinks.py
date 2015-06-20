@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import shutil
 
 
 def main():
@@ -36,6 +37,7 @@ class SymlinkChecker:
     def run(self):
         for symlink_config in self.symlink_configs():
             self.check_and_fix_symlinks(symlink_config)
+            self.apply_create_as_copy(symlink_config)
 
     def symlink_configs(self):
         symlink_d = self._expand_path(self._config.symlink_d)
@@ -74,11 +76,6 @@ class SymlinkChecker:
     def _expand_path(self, path):
         return os.path.expanduser(path)
 
-    def _symlinks_from_file(self, filename):
-        with open(filename, 'rb') as symlinks_file:
-            data = json.load(symlinks_file)
-        return data['symlinks']
-
     def _fix_one_symlink(self, symlink):
         source_expanded = self._expand_path(self._source)
         target_expanded = self._expand_path(self._target)
@@ -87,6 +84,27 @@ class SymlinkChecker:
         os.symlink(target_expanded, source_expanded)
         self.log_change(
             'Created symlink "{source}" pointing to "{target}".')
+
+    def apply_create_as_copy(self, config_data):
+        for item in config_data.create_as_copy:
+            self._create_one_copy(item)
+
+    def _create_one_copy(self, item):
+        self._target, self._source = item
+        if not self._config.fix_symlinks:
+            self.log_info('Would copy "{source}" to "{target}".')
+            return
+
+        self.log_change('Copying from "{source}" to "{target}".')
+        try:
+            shutil.copyfile(
+                self._expand_path(self._source),
+                self._expand_path(self._target))
+        except IOError as e:
+            self.log_problem('Copy operation failed: {reason}', reason=e)
+
+    def log_info(self, message_template, **params):
+        self.log_message('INFO', message_template, **params)
 
     def log_change(self, message_template, **params):
         self.log_message('CHANGE', message_template, **params)
@@ -113,9 +131,12 @@ class SymlinkConfig:
 
     @property
     def symlinks(self):
-        return self._data['symlinks']
+        return self._data.get('symlinks', [])
+
+    @property
+    def create_as_copy(self):
+        return self._data.get('create_as_copy', [])
 
 
 if __name__ == '__main__':
     main()
-
