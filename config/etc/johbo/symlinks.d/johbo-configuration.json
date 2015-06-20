@@ -3,5 +3,8 @@
     ["~/.gitconfig", "~/.nix-profile/etc/johbo/gitconfig"],
     ["~/.hgrc", "~/.nix-profile/etc/johbo/hgrc"],
     ["~/.profile", "~/.nix-profile/etc/johbo/profile"]
+  ],
+  "create_as_copy": [
+    ["~/.emacs", "~/.nix-profile/etc/johbo/dot_emacs"]
   ]
 }

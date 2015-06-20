@@ -1,0 +1,6 @@
+
+;; Template for ~/.emacs which links into the ~/.nix-profile
+;; based configuration.
+
+;; Nix integration, load config from nix-profile
+(load-file "~/.nix-profile/etc/johbo/emacs.el")
