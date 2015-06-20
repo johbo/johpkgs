@@ -41,12 +41,11 @@ class SymlinkChecker:
         symlink_d = self._expand_path(self._config.symlink_d)
         files = os.listdir(symlink_d)
         full_paths = (os.path.join(symlink_d, f) for f in files)
-        return full_paths
+        return (SymlinkConfig(p) for p in full_paths)
 
-    def check_and_fix_symlinks(self, filename):
-        symlinks = self._symlinks_from_file(filename)
+    def check_and_fix_symlinks(self, symlink_config):
         should_fix = self._config.fix_symlinks
-        for symlink in symlinks:
+        for symlink in symlink_config.symlinks:
             needs_fix = self._check_one_symlink(symlink)
             if should_fix and needs_fix:
                 self._fix_one_symlink(symlink)
@@ -100,6 +99,21 @@ class SymlinkChecker:
         params.update({'source': self._source, 'target': self._target})
         message = message_template.format(**params)
         print(category + ': ' + message)
+
+
+class SymlinkConfig:
+
+    def __init__(self, path):
+        self._path = path
+        self._load_data()
+
+    def _load_data(self):
+        with open(self._path, 'rb') as symlinks_file:
+            self._data = json.load(symlinks_file)
+
+    @property
+    def symlinks(self):
+        return self._data['symlinks']
 
 
 if __name__ == '__main__':
