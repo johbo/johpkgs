@@ -16,7 +16,7 @@ def parse_command_line():
         description="Check and update symlinks for configuration files")
     parser.add_argument(
         '--config', '-c', dest='symlink_d',
-        default='~/.nix-profile/etc/johbo/symlink.d',
+        default='~/.nix-profile/etc/johbo/symlinks.d',
         help='Path to the configuration directory, default '
         '"%(default)s".')
     parser.add_argument(
@@ -38,17 +38,17 @@ class SymlinkChecker:
             self.check_and_fix_symlinks(symlink_config)
 
     def symlink_configs(self):
-        files = os.listdir(self._config.symlink_d)
-        full_paths = (
-            os.path.join(self._config.symlink_d, f)
-            for f in files)
+        symlink_d = self._expand_path(self._config.symlink_d)
+        files = os.listdir(symlink_d)
+        full_paths = (os.path.join(symlink_d, f) for f in files)
         return full_paths
 
     def check_and_fix_symlinks(self, filename):
         symlinks = self._symlinks_from_file(filename)
+        should_fix = self._config.fix_symlinks
         for symlink in symlinks:
             needs_fix = self._check_one_symlink(symlink)
-            if needs_fix:
+            if should_fix and needs_fix:
                 self._fix_one_symlink(symlink)
 
     def _check_one_symlink(self, symlink):
