@@ -24,6 +24,7 @@
   '(org-directory "~/orgfiles/")
   '(po-auto-edit-with-msgid t)
   '(po-auto-replace-revision-date t)
+  '(python-fill-docstring-style (quote django))
   '(safe-local-variable-values (quote ((encoding . utf-8))))
   '(scroll-bar-mode nil)
   '(show-paren-mode t)
