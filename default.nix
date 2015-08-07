@@ -28,7 +28,7 @@ let
         pkgs.coreutils
         pkgs.git
         pkgs.mercurial
-        pkgs.screen
+        # pkgs.screen
         pkgs.tmux
         pkgs.tree
         pkgs.watchman
@@ -40,6 +40,7 @@ let
         # TODO: priority
         # pkgs.python2
         pkgs.python2Packages.pip
+        pkgs.python2Packages.supervisor
 
         pkgs.python3
         pkgs.python3Packages.hovercraft
