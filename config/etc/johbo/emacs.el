@@ -2,6 +2,21 @@
 ;; Common emacs configuration
 
 
+;; TODO: This is already cool, still needs a way how to interact
+;; with supervisord
+
+;; Write a PID file if we are a daemon
+;; (defun write-pid-file ()
+;;   "Write the Emacs PID into a file"
+;;   (let ((pid-file "~/.emacs.d/server.pid")
+;;         (pid (number-to-string (emacs-pid))))
+;;     (with-temp-file pid-file (insert pid))))
+
+;; (if (daemonp)
+;;     (write-pid-file))
+
+
+
 ;; Nix integration
 ;; TODO: Check why this is needed on darwin
 (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp")
