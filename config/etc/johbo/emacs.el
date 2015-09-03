@@ -7,6 +7,9 @@
 (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp")
 
 
+;; Allow narrowing, "C-x n n" and "C-x n w"
+(put 'narrow-to-region 'disabled nil)
+
 
 ;; Various configuration settings
 (custom-set-variables
