@@ -38,6 +38,7 @@ class SymlinkChecker:
         for symlink_config in self.symlink_configs():
             self.check_and_fix_symlinks(symlink_config)
             self.apply_create_as_copy(symlink_config)
+            self.apply_directories(symlink_config)
 
     def symlink_configs(self):
         symlink_d = self._expand_path(self._config.symlink_d)
@@ -103,6 +104,28 @@ class SymlinkChecker:
         except IOError as e:
             self.log_problem('Copy operation failed: {reason}', reason=e)
 
+    def apply_directories(self, config_data):
+        for item in config_data.directories:
+            self._create_one_directory(item)
+
+    def _create_one_directory(self, dir_path):
+        dir_path = self._expand_path(dir_path)
+
+        if os.path.exists(dir_path):
+            return
+
+        if not self._config.fix_symlinks:
+            self.log_info(
+                'Would create directory "{dir_path}".', dir_path=dir_path)
+            return
+
+        self.log_change('Creating directory "{dir_path}".', dir_path=dir_path)
+        try:
+            os.makedirs(dir_path)
+        except IOError as e:
+            self.log_problem(
+                'Creating the directory failed: {reason}', reason=e)
+
     def log_info(self, message_template, **params):
         self.log_message('INFO', message_template, **params)
 
@@ -136,6 +159,10 @@ class SymlinkConfig:
     @property
     def create_as_copy(self):
         return self._data.get('create_as_copy', [])
+
+    @property
+    def directories(self):
+        return self._data.get('directories', [])
 
 
 if __name__ == '__main__':
