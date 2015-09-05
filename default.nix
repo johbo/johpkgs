@@ -56,6 +56,8 @@ let
       };
     };
 
+    daemon-fg = callPackage ./daemon-fg { };
+
     dub = callPackage ./dub { };
 
     emacs = pkgs.lib.overrideDerivation pkgs.emacs (oldAttrs: {
