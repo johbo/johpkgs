@@ -28,6 +28,7 @@ let
         pkgs.coreutils
         pkgs.git
         pkgs.mercurial
+        pkgs.pstree
         pkgs.screen
         pkgs.tmux
         pkgs.tree
