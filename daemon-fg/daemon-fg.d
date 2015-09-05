@@ -60,6 +60,7 @@ int main(string[] args) {
 
 void startSubprocess(string[] args) {
     infof("Starting subprocess %s", args.join(" "));
+    args[0] = args[0].expandTilde();
     spawnProcess(args);
 
     // TODO: Wait up to N seconds and then fail if the pid file and process do
