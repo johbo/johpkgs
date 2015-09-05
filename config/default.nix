@@ -7,6 +7,12 @@ in
 stdenv.mkDerivation {
   name = "johbo-configuration";
   src = ./.;
+
+  # TODO: Has a few dependencies:
+  # - daemon-fg
+  # - fix-symlinks (kind of)
+  # - supervisord
+
   buildPhase = ''
     echo "nothing to build"
   '';
@@ -21,8 +27,16 @@ stdenv.mkDerivation {
 
     cp -rv Library $out/Library
   '' + pkgs.lib.optionalString stdenv.isDarwin ''
-    cp -rv etc-darwin/supervisor.d $out/etc
+    # Copy in darwin specific configuration files
+    cp -rv etc-darwin/* $out/etc
   '' + pkgs.lib.optionalString stdenv.isLinux ''
-    cp -rv etc-linux/supervisor.d $out/etc
+    # Copy in linux specific configuration files
+    cp -rv etc-linux/* $out/etc
+
+    # TODO: This is not yet cool, should better point into the store to
+    # the correct supervisord version. On the other side, I want to use
+    # the installed one.
+    substituteInPlace $out/etc/systemd/user/supervisord.service \
+        --replace "{{HOME}}" ${builtins.getEnv "HOME"}
   '';
 }

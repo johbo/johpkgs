@@ -1,0 +1,12 @@
+[Unit]
+Description=Supervisord to manage user services cross platform
+
+[Service]
+ExecStart={{HOME}}/.nix-profile/bin/supervisord-with-profile.sh \
+    -c {{HOME}}/.nix-profile/etc/supervisord.conf
+# TODO: Not sure here, reload kills the subprocesses, update seems better
+ExecReload={{HOME}}/.nix-profile/bin/supervisorctl \
+    -c {{HOME}}/.nix-profile/etc/supervisord.conf update
+
+[Install]
+WantedBy=default.target
