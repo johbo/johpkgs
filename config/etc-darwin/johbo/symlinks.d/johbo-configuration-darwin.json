@@ -1,0 +1,6 @@
+{
+    "symlinks": [
+        ["~/Library/LaunchAgents/johbo.supervisord.plist",
+         "~/.nix-profile/Library/LaunchAgents/johbo.supervisord.plist"]
+    ]
+}

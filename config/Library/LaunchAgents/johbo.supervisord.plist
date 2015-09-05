@@ -4,15 +4,17 @@
  <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>johbo.emacs.daemon</string>
+    <string>johbo.supervisord</string>
     <key>ProgramArguments</key>
     <array>
       <!-- TODO: Should generate this path during build -->
-      <string>/Users/johannes/.nix-profile/bin/emacs-daemon.sh</string>
+      <string>/Users/johannes/.nix-profile/bin/supervisord-with-profile.sh</string>
+      <string>-c</string>
+      <string>/Users/johannes/.nix-profile/etc/supervisord.conf</string>
     </array>
    <key>RunAtLoad</key>
    <true/>
    <key>ServiceDescription</key>
-   <string>Gnu Emacs Daemon</string>
+   <string>Supervisor Daemon</string>
   </dict>
 </plist>
