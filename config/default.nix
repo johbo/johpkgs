@@ -1,4 +1,4 @@
-{ stdenv }:
+{ stdenv, pkgs }:
 
 let
   home = builtins.getEnv "HOME";
@@ -20,5 +20,9 @@ stdenv.mkDerivation {
       --replace "%(ENV_HOME)s" ${home}
 
     cp -rv Library $out/Library
+  '' + pkgs.lib.optionalString stdenv.isDarwin ''
+    cp -rv etc-darwin/supervisor.d $out/etc
+  '' + pkgs.lib.optionalString stdenv.isLinux ''
+    cp -rv etc-linux/supervisor.d $out/etc
   '';
 }
