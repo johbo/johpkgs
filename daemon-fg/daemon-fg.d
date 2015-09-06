@@ -5,6 +5,7 @@ import core.thread;
 import core.time;
 import std.array;
 import std.conv;
+import std.datetime;
 import std.experimental.logger;
 import std.file;
 import std.getopt;
@@ -50,6 +51,8 @@ int main(string[] args) {
     auto subcommandArgs = args[1..$];
     startSubprocess(subcommandArgs);
 
+    if (!waitUntilProcessIsRunning(pidFile)) return 1;
+
     watchedPid = readText(pidFile).to!int;
     connectSignalForwarders();
     waitUntilProcessTerminates(watchedPid);
@@ -62,10 +65,24 @@ void startSubprocess(string[] args) {
     infof("Starting subprocess %s", args.join(" "));
     args[0] = args[0].expandTilde();
     spawnProcess(args);
+}
 
-    // TODO: Wait up to N seconds and then fail if the pid file and process do
-    // not yet match.
-    Thread.sleep(dur!"msecs"(500));
+
+bool waitUntilProcessIsRunning(string pidFile) {
+    auto timeout = dur!"seconds"(10);
+    auto waitingSince = Clock.currTime();
+    int pid;
+
+    infof("Waiting up to %s for the process to start", timeout);
+    while(Clock.currTime() - waitingSince < timeout) {
+        Thread.sleep(dur!"msecs"(500));
+        pid = readText(pidFile).to!int;
+        if(isProcessRunning(pid)) return true;
+        log("Still waiting...");
+    }
+
+    error("Timeout, unable to find running process, giving up.");
+    return false;
 }
 
 
