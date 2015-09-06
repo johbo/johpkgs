@@ -15,9 +15,7 @@ let
       name = "johbo-common";
 
       paths = [
-        johbo-config
-
-        emacs
+        pkgs.emacs
         emacsPackages.d
         emacsPackages.yaml
 
@@ -29,7 +27,6 @@ let
         pkgs.git
         pkgs.mercurial
         pkgs.pstree
-        pkgs.screen
         pkgs.tmux
         pkgs.tree
         pkgs.watchman
@@ -60,20 +57,6 @@ let
     daemon-fg = callPackage ./daemon-fg { };
 
     dub = callPackage ./dub { };
-
-    emacs = pkgs.lib.overrideDerivation pkgs.emacs (oldAttrs: {
-      # Adding support for the GUI integration for darwin
-      configureFlags = oldAttrs.configureFlags ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
-        "--with-ns --disable-ns-self-contained"
-      ];
-
-      # Copy over the generated Emacs.app data
-      postInstall = oldAttrs.postInstall + pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
-        mkdir -p $out/Applications
-        cp -r nextstep/Emacs.app $out/Applications
-      '';
-
-    });
 
     emacsPackages = {
       d = callPackage ./emacs-modes/d { };
