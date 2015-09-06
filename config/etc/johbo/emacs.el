@@ -76,6 +76,11 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 
+;; IDO mode
+(require 'ido)
+(ido-mode t)
+
+
 ;; Set up the package repos for emacs
 (require 'package)
 (add-to-list 'package-archives
