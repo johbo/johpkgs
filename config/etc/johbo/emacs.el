@@ -95,6 +95,12 @@
 (require 'auto-complete-config)
 (ac-config-default)
 
+;; JEDI as completion plugin for Python
+(require 'jedi)
+(add-to-list 'ac-sources 'ac-source-jedi-direct)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:server-command '("jediepcserver"))
+
 ;; Projectile
 (require 'projectile)
 (projectile-global-mode)
