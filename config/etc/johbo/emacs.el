@@ -17,8 +17,15 @@
 
 ;; Nix integration
 (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp")
+
+;; Set up the package repos for emacs
+(require 'package)
+(add-to-list 'package-archives
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
 ;; Integration for emacsPackagesNg
 (add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
+(package-initialize)
 
 
 ;; Allow narrowing, "C-x n n" and "C-x n w"
@@ -64,6 +71,8 @@
 ;; Register D mode
 (autoload 'd-mode "d-mode" "Major mode for editing D source code." t)
 (push '("\\.d$" . d-mode) auto-mode-alist)
+;; TODO: currently need this so that c-default-style is defined.
+(require 'cc-mode)
 (push '((d-mode . "stroustrup")) c-default-style)
 
 
@@ -110,14 +119,6 @@
 (require 'flycheck)
 (add-hook 'after-init-hook 'global-flycheck-mode)
 
-
-
-;; Set up the package repos for emacs
-(require 'package)
-(add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
-(package-initialize)
 
 
 ;; run the server by default
