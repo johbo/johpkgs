@@ -5,6 +5,14 @@ let
 
   pkgs = import <nixpkgs> {inherit system; };
 
+  inherit(pkgs)
+    emacs
+    fetchFromGitHub
+    fetchurl
+    lib
+    stdenv
+    texinfo;
+
   callPackage = pkgs.lib.callPackageWith (pkgs // self);
 
   self = rec {
@@ -15,11 +23,12 @@ let
       name = "johbo-common";
 
       paths = [
-        pkgs.emacs
+        emacs
         pkgs.emacsPackages.autoComplete
         pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.projectile
         emacsPackages.d
+        emacsPackages.flx-ido
         emacsPackages.yaml
 
         pkgs.aspell
@@ -63,7 +72,14 @@ let
 
     dub = callPackage ./dub { };
 
-    emacsPackages = callPackage ./emacs-modes { };
+    emacsPackages = import ./emacs-modes {
+      inherit
+        callPackage
+        fetchFromGitHub;
+      melpaBuild = import <nixpkgs/pkgs/build-support/emacs/melpa.nix> {
+        inherit lib stdenv fetchurl emacs texinfo;
+      };
+    };
 
   };
 in

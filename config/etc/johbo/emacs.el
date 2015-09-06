@@ -79,7 +79,15 @@
 
 ;; IDO mode
 (require 'ido)
+(require 'flx-ido)
 (ido-mode t)
+;; TODO: find out what this does
+;; (ido-everywhere t)
+(flx-ido-mode t)
+;; disable ido faces to see flx highlights
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
 
 ;; Autocomplete mode
 (require 'auto-complete-config)
