@@ -61,6 +61,8 @@
 ;; Register D mode
 (autoload 'd-mode "d-mode" "Major mode for editing D source code." t)
 (push '("\\.d$" . d-mode) auto-mode-alist)
+(push '((d-mode . "stroustrup")) c-default-style)
+
 
 
 ;; Register nix mode
