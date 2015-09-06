@@ -2,6 +2,9 @@
 ;; Common emacs configuration
 
 
+;;; Code:
+
+
 ;; Write a PID file if we are a daemon, so that supervisord can manage us with
 ;; pidproxy
 (defun write-pid-file ()
@@ -118,6 +121,7 @@
 ;; Flycheck
 (require 'flycheck)
 (add-hook 'after-init-hook 'global-flycheck-mode)
+(setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
 
 
 
