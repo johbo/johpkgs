@@ -39,8 +39,10 @@ let
         pkgs.nix-serve
         pkgs.nixops
 
+        pkgs.pylint
         # TODO: priority
         # pkgs.python2
+        pkgs.python2Packages.flake8
         pkgs.python2Packages.pip
         pkgs.python2Packages.supervisor
 
@@ -61,10 +63,7 @@ let
 
     dub = callPackage ./dub { };
 
-    emacsPackages = {
-      d = callPackage ./emacs-modes/d { };
-      yaml = callPackage ./emacs-modes/yaml { };
-    };
+    emacsPackages = callPackage ./emacs-modes { };
 
   };
 in
