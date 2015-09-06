@@ -16,8 +16,9 @@
 
 
 ;; Nix integration
-;; TODO: Check why this is needed on darwin
 (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp")
+;; Integration for emacsPackagesNg
+(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
 
 
 ;; Allow narrowing, "C-x n n" and "C-x n w"
@@ -83,6 +84,10 @@
 ;; Autocomplete mode
 (require 'auto-complete-config)
 (ac-config-default)
+
+;; Projectile
+(require 'projectile)
+(projectile-global-mode)
 
 
 
