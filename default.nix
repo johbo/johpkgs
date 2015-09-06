@@ -24,11 +24,14 @@ let
 
       paths = [
         emacs
-        pkgs.emacsPackages.autoComplete
         pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.projectile
+        emacsPackages.autoComplete
         emacsPackages.d
         emacsPackages.flx-ido
+        emacsPackages.jedi
+        # TODO: Find out why jedi does not full this in automatically
+        emacsPackages.jedi-epcserver
         emacsPackages.yaml
 
         pkgs.aspell
@@ -52,6 +55,7 @@ let
         # TODO: priority
         # pkgs.python2
         pkgs.python2Packages.flake8
+        pkgs.python2Packages.jedi
         pkgs.python2Packages.pip
         pkgs.python2Packages.supervisor
 
@@ -75,11 +79,24 @@ let
     emacsPackages = import ./emacs-modes {
       inherit
         callPackage
-        fetchFromGitHub;
+        fetchFromGitHub
+        epc;
+      inherit (pkgs.pythonPackages)
+        buildPythonPackage
+        jedi
+        argparse;
       melpaBuild = import <nixpkgs/pkgs/build-support/emacs/melpa.nix> {
         inherit lib stdenv fetchurl emacs texinfo;
       };
     };
+
+    epc = pkgs.lib.overrideDerivation pkgs.pythonPackages.epc (oldAttr: rec {
+      name = "epc-0.0.4";
+      src = pkgs.fetchurl {
+        url = "http://pypi.python.org/packages/source/e/epc/${name}.tar.gz";
+        md5 = "9b91654edf64a5e841f64243b5251eed";
+      };
+    });
 
   };
 in
