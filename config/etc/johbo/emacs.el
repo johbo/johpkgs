@@ -90,6 +90,11 @@
 (projectile-global-mode)
 
 
+;; Flycheck
+(require 'flycheck)
+(add-hook 'after-init-hook 'global-flycheck-mode)
+
+
 
 ;; Set up the package repos for emacs
 (require 'package)

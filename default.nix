@@ -17,6 +17,7 @@ let
       paths = [
         pkgs.emacs
         pkgs.emacsPackages.autoComplete
+        pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.projectile
         emacsPackages.d
         emacsPackages.yaml
