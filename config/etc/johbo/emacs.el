@@ -57,6 +57,8 @@
 (setq x-select-enable-clipboard t)
 ;(setq-default show-trailing-whitespace t)
 
+;; Increase the threshold when GC will be initiated, suggested by flx
+(setq gc-cons-threshold 20000000)
 
 
 ;; Register D mode
