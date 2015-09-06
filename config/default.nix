@@ -25,8 +25,12 @@ stdenv.mkDerivation {
     substituteInPlace $out/etc/supervisord.conf \
       --replace "%(ENV_HOME)s" ${home}
 
-    cp -rv Library $out/Library
   '' + pkgs.lib.optionalString stdenv.isDarwin ''
+    cp -rv Library $out/Library
+
+    substituteInPlace $out/Library/LaunchAgents/johbo.supervisord.plist \
+      --replace "{{HOME}}" ${builtins.getEnv "HOME"}
+
     # Copy in darwin specific configuration files
     cp -rv etc-darwin/* $out/etc
   '' + pkgs.lib.optionalString stdenv.isLinux ''

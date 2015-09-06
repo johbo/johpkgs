@@ -7,10 +7,9 @@
     <string>johbo.supervisord</string>
     <key>ProgramArguments</key>
     <array>
-      <!-- TODO: Should generate this path during build -->
-      <string>/Users/johannes/.nix-profile/bin/supervisord-with-profile.sh</string>
+      <string>{{HOME}}/.nix-profile/bin/supervisord-with-profile.sh</string>
       <string>-c</string>
-      <string>/Users/johannes/.nix-profile/etc/supervisord.conf</string>
+      <string>{{HOME}}/.nix-profile/etc/supervisord.conf</string>
     </array>
    <key>RunAtLoad</key>
    <true/>
