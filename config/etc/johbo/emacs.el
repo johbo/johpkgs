@@ -80,6 +80,11 @@
 (require 'ido)
 (ido-mode t)
 
+;; Autocomplete mode
+(require 'auto-complete-config)
+(ac-config-default)
+
+
 
 ;; Set up the package repos for emacs
 (require 'package)
