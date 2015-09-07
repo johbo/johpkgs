@@ -35,6 +35,7 @@ let
         emacsPackages.jedi
         # TODO: Find out why jedi does not full this in automatically
         emacsPackages.jedi-epcserver
+        emacsPackages.monky
         emacsPackages.yaml
 
         pkgs.aspell

@@ -127,6 +127,7 @@
 
 ;; Version control tools
 (require 'magit)
+(require 'monky)
 
 
 ;; run the server by default

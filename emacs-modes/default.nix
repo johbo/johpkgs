@@ -180,6 +180,22 @@ in rec {
 
   };
 
+  monky = melpaBuild rec {
+    version = "0.1";
+    pname = "monky";
+
+    src = fetchFromGitHub {
+      owner = "ananthakumaran";
+      repo = "monky";
+      rev = "48c0200910739b6521f26f6423b2bfb8c38b4482";
+      sha256 = "0ddkcb5rzpcqpsrwkhvm9kzpx2mlrrsp7psljkz5q5qfvy3wdagh";
+    };
+    files = [ "monky.el" "monky.info" ];
+    meta = {
+      description = "Magit for Hg";
+    };
+  };
+
   popup = melpaBuild rec {
     version = "0.5.0";
     pname = "popup";
