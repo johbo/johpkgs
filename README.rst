@@ -9,7 +9,7 @@ That's my package collection based on Nix, mainly serves two purposes:
 * Manage a shared set of configuration files to use on different machines, by
   installing `johbo-config`.
 
-* Provide custom packages which are not ni `nixpkgs`.
+* Provide custom packages which are not in `nixpkgs`.
 
 
 Dependencies
