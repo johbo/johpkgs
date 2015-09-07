@@ -197,14 +197,14 @@ in rec {
   };
 
   popup = melpaBuild rec {
-    version = "0.5.0";
+    version = "0.5.3";
     pname = "popup";
 
     src = fetchFromGitHub {
       owner = "auto-complete";
       repo = "popup-el";
       rev = "v" + version;
-      sha256 = "0836ayyz1syvd9ry97ya06l8mpr88c6xbgb4d98szj6iwbypcj7b";
+      sha256 = "1y538siabcf1n00wr4iz5gbxfndw661kx2mn9w1g4lg7yi4n0h0h";
     };
     meta = {
       description = " Visual Popup Interface Library for Emacs";
