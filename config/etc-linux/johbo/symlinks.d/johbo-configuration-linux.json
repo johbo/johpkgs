@@ -1,0 +1,5 @@
+{
+  "symlinks": [
+    ["~/.config/systemd", "~/.nix-profile/etc/systemd"]
+  ]
+}

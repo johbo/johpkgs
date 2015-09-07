@@ -5,6 +5,16 @@ let
 
   pkgs = import <nixpkgs> {inherit system; };
 
+  inherit(pkgs)
+    emacs
+    fetchFromGitHub
+    fetchurl
+    lib
+    stdenv
+    texinfo;
+
+  buildPythonPackage = pkgs.pythonPackages.buildPythonPackage;
+
   callPackage = pkgs.lib.callPackageWith (pkgs // self);
 
   self = rec {
@@ -15,10 +25,15 @@ let
       name = "johbo-common";
 
       paths = [
-        johbo-config
-
         emacs
+        pkgs.emacsPackagesNg.flycheck
+        pkgs.emacsPackagesNg.projectile
+        emacsPackages.autoComplete
         emacsPackages.d
+        emacsPackages.flx-ido
+        emacsPackages.jedi
+        # TODO: Find out why jedi does not full this in automatically
+        emacsPackages.jedi-epcserver
         emacsPackages.yaml
 
         pkgs.aspell
@@ -28,7 +43,7 @@ let
         pkgs.coreutils
         pkgs.git
         pkgs.mercurial
-        # pkgs.screen
+        pkgs.pstree
         pkgs.tmux
         pkgs.tree
         pkgs.watchman
@@ -36,9 +51,13 @@ let
 
         pkgs.nix-repl
         pkgs.nix-serve
+        pkgs.nixops
 
+        pkgs.pylint
         # TODO: priority
         # pkgs.python2
+        flake8
+        pkgs.python2Packages.jedi
         pkgs.python2Packages.pip
         pkgs.python2Packages.supervisor
 
@@ -55,25 +74,72 @@ let
       };
     };
 
+    daemon-fg = callPackage ./daemon-fg { };
+
     dub = callPackage ./dub { };
 
-    emacs = pkgs.lib.overrideDerivation pkgs.emacs (oldAttrs: {
-      # Adding support for the GUI integration for darwin
-      configureFlags = oldAttrs.configureFlags ++ pkgs.lib.optional pkgs.stdenv.isDarwin [
-        "--with-ns --disable-ns-self-contained"
-      ];
+    emacsPackages = import ./emacs-modes {
+      inherit
+        callPackage
+        buildPythonPackage
+        fetchFromGitHub
+        epc;
+      inherit (pkgs.pythonPackages)
+        jedi
+        argparse;
+      melpaBuild = import <nixpkgs/pkgs/build-support/emacs/melpa.nix> {
+        inherit lib stdenv fetchurl emacs texinfo;
+      };
+    };
 
-      # Copy over the generated Emacs.app data
-      postInstall = oldAttrs.postInstall + pkgs.lib.optionalString pkgs.stdenv.isDarwin ''
-        mkdir -p $out/Applications
-        cp -r nextstep/Emacs.app $out/Applications
-      '';
-
+    epc = pkgs.lib.overrideDerivation pkgs.pythonPackages.epc (oldAttr: rec {
+      name = "epc-0.0.4";
+      src = pkgs.fetchurl {
+        url = "http://pypi.python.org/packages/source/e/epc/${name}.tar.gz";
+        md5 = "9b91654edf64a5e841f64243b5251eed";
+      };
     });
 
-    emacsPackages = {
-      d = callPackage ./emacs-modes/d { };
-      yaml = callPackage ./emacs-modes/yaml { };
+    flake8 = pkgs.lib.overrideDerivation pkgs.pythonPackages.flake8 (oldAttr: rec {
+      propagatedBuildInputs = oldAttr.propagatedBuildInputs ++ [
+        # hacking
+        flake8-import-order
+      ];
+    });
+
+    flake8-import-order = buildPythonPackage rec {
+      version = "0.6.1";
+      name = "flake8-import-order-${version}";
+      src = fetchurl {
+        url = "https://pypi.python.org/packages/source/f/flake8-import-order/${name}.tar.gz";
+        sha256 = "1qr5mga92ylibn4037165w3vixw6qrhhd9hr1f832b89hm9ln24i";
+      };
+      # TODO: Check again, was very hard to convince it to run, right now only
+      # want the import checker, so it's fine to ignore the rest.
+      doCheck = false;
+      propagatedBuildInputs = with pkgs.pythonPackages; [
+        pep8
+      ];
+    };
+
+    hacking = buildPythonPackage rec {
+      version = "0.10.2";
+      name = "hacking-${version}";
+      src = fetchurl {
+        url = "https://pypi.python.org/packages/source/h/hacking/${name}.tar.gz";
+        sha256 = "1a310k3dv04jg7zvmk37h2ql7y9kf4hvdxb74bjlwdxgmy6h4wap";
+      };
+      # TODO: Check again, was very hard to convince it to run, right now only
+      # want the import checker, so it's fine to ignore the rest.
+      doCheck = false;
+      preBuild = ''
+        echo "" > requirements.txt
+      '';
+      propagatedBuildInputs = with pkgs.pythonPackages; [
+        mccabe
+        pbr
+        six
+      ];
     };
 
   };

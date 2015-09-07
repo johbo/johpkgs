@@ -2,10 +2,37 @@
 ;; Common emacs configuration
 
 
+;;; Code:
+
+
+;; Write a PID file if we are a daemon, so that supervisord can manage us with
+;; pidproxy
+(defun write-pid-file ()
+  "Write the Emacs PID into a file"
+  (let ((pid-file "~/var/run/emacs-server.pid")
+        (pid (number-to-string (emacs-pid))))
+    (with-temp-file pid-file (insert pid))))
+
+(if (daemonp)
+    (write-pid-file))
+
+
+
 ;; Nix integration
-;; TODO: Check why this is needed on darwin
 (add-to-list 'load-path "~/.nix-profile/share/emacs/site-lisp")
 
+;; Set up the package repos for emacs
+(require 'package)
+(add-to-list 'package-archives
+    '("marmalade" .
+      "http://marmalade-repo.org/packages/"))
+;; Integration for emacsPackagesNg
+(add-to-list 'package-directory-list "~/.nix-profile/share/emacs/site-lisp/elpa")
+(package-initialize)
+
+
+;; Allow narrowing, "C-x n n" and "C-x n w"
+(put 'narrow-to-region 'disabled nil)
 
 
 ;; Various configuration settings
@@ -41,11 +68,17 @@
 (setq x-select-enable-clipboard t)
 ;(setq-default show-trailing-whitespace t)
 
+;; Increase the threshold when GC will be initiated, suggested by flx
+(setq gc-cons-threshold 20000000)
 
 
 ;; Register D mode
 (autoload 'd-mode "d-mode" "Major mode for editing D source code." t)
 (push '("\\.d$" . d-mode) auto-mode-alist)
+;; TODO: currently need this so that c-default-style is defined.
+(require 'cc-mode)
+(push '((d-mode . "stroustrup")) c-default-style)
+
 
 
 ;; Register nix mode
@@ -59,12 +92,38 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 
-;; Set up the package repos for emacs
-(require 'package)
-(add-to-list 'package-archives
-    '("marmalade" .
-      "http://marmalade-repo.org/packages/"))
-(package-initialize)
+;; IDO mode
+(require 'ido)
+(require 'flx-ido)
+(ido-mode t)
+;; TODO: find out what this does
+;; (ido-everywhere t)
+(flx-ido-mode t)
+;; disable ido faces to see flx highlights
+(setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
+
+
+;; Autocomplete mode
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; JEDI as completion plugin for Python
+(require 'jedi)
+(add-to-list 'ac-sources 'ac-source-jedi-direct)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:server-command '("jediepcserver"))
+
+;; Projectile
+(require 'projectile)
+(projectile-global-mode)
+
+
+;; Flycheck
+(require 'flycheck)
+(add-hook 'after-init-hook 'global-flycheck-mode)
+(setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
+
 
 
 ;; run the server by default

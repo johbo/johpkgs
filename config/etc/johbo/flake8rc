@@ -1,0 +1,4 @@
+[flake8]
+#ignore = H404,H405
+#select = H301,H306
+import-order-style = google

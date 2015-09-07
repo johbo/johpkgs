@@ -11,9 +11,18 @@ NIX_LINK=$HOME/.nix-profile
 # Expects the emacs app to be available in ~/.nix-profile
 if [ -e $NIX_LINK/Applications/Emacs.app/Contents/MacOS/Emacs ]
 then
+    foundEmacs=$NIX_LINK/Applications/Emacs.app/Contents/MacOS/Emacs
+elif [ -e $NIX_LINK/bin/emacs ]
+then
+    foundEmacs=$NIX_LINK/bin/emacs
+fi
+
+
+if [ -n "$foundEmacs" ]
+then
     export ALTERNATE_EDITOR=""
     export EDITOR='emacsclient -t'
-    export VISUAL="emacsclient -a $NIX_LINK/Applications/Emacs.app/Contents/MacOS/Emacs"
+    export VISUAL="emacsclient -a $foundEmacs"
 fi
 
 
