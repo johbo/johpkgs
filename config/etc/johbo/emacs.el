@@ -125,6 +125,9 @@
 (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
 
 
+;; Version control tools
+(require 'magit)
+
 
 ;; run the server by default
 ;; Note: switching to launchd managed emacs daemon
