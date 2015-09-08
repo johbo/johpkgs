@@ -98,9 +98,13 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
-; TODO: Think of global support for links
-;(global-set-key "\C-c L" 'org-insert-link-global)
-;(global-set-key "\C-c o" 'org-open-at-point-global)
+;; TODO: Think of global support for links
+;;(global-set-key "\C-c L" 'org-insert-link-global)
+;;(global-set-key "\C-c o" 'org-open-at-point-global)
+
+
+;; YaSnippets
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
 
 
 ;; IDO mode
