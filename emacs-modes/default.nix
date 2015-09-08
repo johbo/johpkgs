@@ -16,14 +16,14 @@ let
 in rec {
 
   autoComplete = melpaBuild rec {
-    version = "1.4.0";
+    version = "1.5.0";
     pname = "auto-complete";
 
     src = fetchFromGitHub {
       owner = "auto-complete";
       repo = "auto-complete";
       rev = "v" + version;
-      sha256 = "050lb8qjq7ra35mqp6j6qkwbvq5zj3yhz73aym5kf1vjd42rmjcw";
+      sha256 = "0q880dksf3bj1hixa4zhj3ybvrqf1wcnjnmb37i49qwdy6p1ma06";
     };
     packageRequires = [ popup ];
     meta = {
@@ -132,12 +132,12 @@ in rec {
 
   jedi = melpaBuild rec {
     pname = "jedi";
-    version = "0.2.2";
+    version = "0.2.5";
     src = fetchFromGitHub {
       owner = "tkf";
       repo = "emacs-jedi";
       rev = "v" + version;
-      sha256 = "00k8phkqdna0fvn3d28zc6q91b415ybzdwx5gn1khxxdf567jjrq";
+      sha256 = "08maylbnpz7hg3lz53hp2n4xd7xazkg51xhz1qf388bgz36bvj0q";
     };
     files = [ "jedi.el" ];
     packageRequires = [ jedi-core ];
@@ -149,12 +149,12 @@ in rec {
 
   jedi-core = melpaBuild rec {
     pname = "jedi-core";
-    version = "0.2.2";
+    version = "0.2.5";
     src = fetchFromGitHub {
       owner = "tkf";
       repo = "emacs-jedi";
       rev = "v" + version;
-      sha256 = "00k8phkqdna0fvn3d28zc6q91b415ybzdwx5gn1khxxdf567jjrq";
+      sha256 = "08maylbnpz7hg3lz53hp2n4xd7xazkg51xhz1qf388bgz36bvj0q";
     };
     files = [ "jedi-core.el" ];
     packageRequires = [ autoComplete epc python-environment ];
@@ -164,13 +164,13 @@ in rec {
   };
 
   jedi-epcserver = buildPythonPackage rec {
-    version = "0.2.2";
+    version = "0.2.5";
     name = "jediepcserver-${version}";
     src = fetchFromGitHub {
       owner = "tkf";
       repo = "emacs-jedi";
       rev = "v" + version;
-      sha256 = "00k8phkqdna0fvn3d28zc6q91b415ybzdwx5gn1khxxdf567jjrq";
+      sha256 = "08maylbnpz7hg3lz53hp2n4xd7xazkg51xhz1qf388bgz36bvj0q";
     };
     propagatedBuildInputs = [
       argparse_

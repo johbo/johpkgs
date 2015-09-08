@@ -85,9 +85,9 @@ let
         callPackage
         buildPythonPackage
         fetchFromGitHub
-        epc;
+        epc
+        jedi;
       inherit (pkgs.pythonPackages)
-        jedi
         argparse;
       melpaBuild = import <nixpkgs/pkgs/build-support/emacs/melpa.nix> {
         inherit lib stdenv fetchurl emacs texinfo;
@@ -95,11 +95,12 @@ let
     };
 
     epc = pkgs.lib.overrideDerivation pkgs.pythonPackages.epc (oldAttr: rec {
-      name = "epc-0.0.4";
+      name = "epc-0.0.5";
       src = pkgs.fetchurl {
         url = "http://pypi.python.org/packages/source/e/epc/${name}.tar.gz";
-        md5 = "9b91654edf64a5e841f64243b5251eed";
+        md5 = "de54a24ace8a9b3f5b2d8f014b8c4a42";
       };
+      propagatedBuildInputs = [ sexpdata ];
     });
 
     flake8 = pkgs.lib.overrideDerivation pkgs.pythonPackages.flake8 (oldAttr: rec {
@@ -143,6 +144,22 @@ let
         six
       ];
     };
+
+    jedi = pkgs.lib.overrideDerivation pkgs.pythonPackages.jedi (oldAttr: rec {
+      name = "jedi-0.9.0";
+      src = pkgs.fetchurl {
+        url = "https://pypi.python.org/packages/source/j/jedi/${name}.tar.gz";
+        md5 = "2fee93d273622527ef8c97ac736e92bd";
+      };
+    });
+
+    sexpdata = pkgs.lib.overrideDerivation pkgs.pythonPackages.sexpdata (oldAttr: rec {
+      name = "sexpdata-0.0.3";
+      src = pkgs.fetchurl {
+        url = "http://pypi.python.org/packages/source/s/sexpdata/${name}.tar.gz";
+        md5 = "de9c2c3ee28551e766cb535c0b2cebf0";
+      };
+    });
 
   };
 in
