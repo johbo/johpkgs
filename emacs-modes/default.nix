@@ -228,4 +228,20 @@ in rec {
   };
 
   yaml = callPackage ./yaml { };
+
+  yasnippet = melpaBuild rec {
+    pname = "yasnippet";
+    version = "0.8.1";
+    src = fetchFromGitHub {
+      owner = "capitaomorte";
+      repo = "yasnippet";
+      rev = "2f6cfef03139dbb74b0f4aeaffef0f9647bee5b8";
+      sha256 = "0ki9fqmag7ghmc1kfkh63mah1bhbafi8fcp729q5hzb4c1jgm5nf";
+    };
+    packageRequires = [ ];
+    meta = {
+      description = "A template system for Emacs ";
+    };
+  };
+
 }

@@ -33,10 +33,11 @@ let
         emacsPackages.d
         emacsPackages.flx-ido
         emacsPackages.jedi
-        # TODO: Find out why jedi does not full this in automatically
+        # TODO: Find out why jedi does not fill this in automatically
         emacsPackages.jedi-epcserver
         emacsPackages.monky
         emacsPackages.yaml
+        emacsPackages.yasnippet
 
         pkgs.aspell
         pkgs.aspellDicts.de
