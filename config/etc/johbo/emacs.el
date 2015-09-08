@@ -109,10 +109,15 @@
 (ac-config-default)
 
 ;; JEDI as completion plugin for Python
-(require 'jedi)
 (add-to-list 'ac-sources 'ac-source-jedi-direct)
+(setq jedi:complete-on-dot t)
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:server-command '("jediepcserver"))
+;; (setq jedi:server-args
+;;       '("--log" "/tmp/jediepcserver.log"
+;;         "--log-traceback"
+;;         "--log-level" "DEBUG"))
+
 
 ;; Projectile
 (require 'projectile)
