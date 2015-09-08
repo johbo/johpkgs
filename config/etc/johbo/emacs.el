@@ -92,6 +92,17 @@
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
 
+;; Org mode configuration
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+; TODO: Think of global support for links
+;(global-set-key "\C-c L" 'org-insert-link-global)
+;(global-set-key "\C-c o" 'org-open-at-point-global)
+
+
 ;; IDO mode
 (require 'ido)
 (require 'flx-ido)
