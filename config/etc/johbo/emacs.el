@@ -47,8 +47,6 @@
   '(js2-mode-escape-quotes nil)
   '(js2-mode-indent-ignore-first-tab t)
   '(menu-bar-mode nil)
-  '(org-agenda-files (quote ("~/orgfiles/")))
-  '(org-directory "~/orgfiles/")
   '(po-auto-edit-with-msgid t)
   '(po-auto-replace-revision-date t)
   '(python-fill-docstring-style (quote django))
@@ -101,6 +99,18 @@
 ;; TODO: Think of global support for links
 ;;(global-set-key "\C-c L" 'org-insert-link-global)
 ;;(global-set-key "\C-c o" 'org-open-at-point-global)
+
+;; TODO: not yet sure about the agenda files
+;;(setq org-agenda-files (quote ("~/n/")))
+(setq org-directory "~/n")
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
+(setq org-capture-templates
+ '(("t" "Tasks" entry (file+headline (concat org-directory "/notes.org") "Tasks")
+    "* TODO %?\n  %i\n  %a")
+   ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
+    "* %?\nEntered on %U\n  %i\n  %a")))
+
 
 
 ;; YaSnippets
