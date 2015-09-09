@@ -36,6 +36,7 @@ let
         # TODO: Find out why jedi does not fill this in automatically
         emacsPackages.jedi-epcserver
         emacsPackages.monky
+        emacsPackages.sr-speedbar
         emacsPackages.yaml
         emacsPackages.yasnippet
 

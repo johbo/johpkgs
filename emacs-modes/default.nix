@@ -227,6 +227,20 @@ in rec {
     };
   };
 
+  sr-speedbar = melpaBuild rec {
+    pname = "sr-speedbar";
+    version = "0.1.10";
+    src = fetchFromGitHub {
+      owner = "emacsmirror";
+      repo = "sr-speedbar";
+      rev = "ecfd2c866c157c3bad44b767feb70ad969926852";
+      sha256 = "0bs13s8y77q3wizxvy5d6v368sdcf417dx53zvy4mqknjb20aynh";
+    };
+    meta = {
+      description = "Same frame speedbar";
+    };
+  };
+
   yaml = callPackage ./yaml { };
 
   yasnippet = melpaBuild rec {
