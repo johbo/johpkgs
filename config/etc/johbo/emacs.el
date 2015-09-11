@@ -109,7 +109,10 @@
  '(("t" "Tasks" entry (file+headline (concat org-directory "/notes.org") "Tasks")
     "* TODO %?\n  %i\n  %a")
    ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
-    "* %?\nEntered on %U\n  %i\n  %a")))
+    "* %?\nEntered on %U\n  %i\n  %a")
+   ("d" "Daily" entry (file+headline (concat org-directory "/daily.org")
+                                     "Since the last daily"))
+   ))
 
 
 
