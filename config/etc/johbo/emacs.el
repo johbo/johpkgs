@@ -103,17 +103,26 @@
 ;; TODO: not yet sure about the agenda files
 ;;(setq org-agenda-files (quote ("~/n/")))
 (setq org-directory "~/n")
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(setq org-default-notes-file (concat org-directory "/capture.org"))
 
 (setq org-capture-templates
- '(("t" "Tasks" entry (file+headline (concat org-directory "/notes.org") "Tasks")
+ '(("t" "Tasks" entry (file+headline (concat org-directory "/capture.org")
+                                     "Refile Tasks")
     "* TODO %?\n  %i\n  %a")
    ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
+    "* %?\nEntered on %U\n  %i\n  %a")
+   ("f" "Feedback" entry (file+datetree (concat org-directory "/hr/feedback.org"))
     "* %?\nEntered on %U\n  %i\n  %a")
    ("d" "Daily" entry (file+headline (concat org-directory "/daily.org")
                                      "Since the last daily"))
    ))
 
+
+;; refiling
+(setq org-refile-use-outline-path t)
+(setq org-outline-path-complete-in-steps t)
+(setq org-refile-allow-creating-parent-nodes nil)
+(setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
 
 
 ;; YaSnippets
