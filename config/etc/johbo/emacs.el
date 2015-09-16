@@ -107,6 +107,15 @@
 (setq org-refile-allow-creating-parent-nodes nil)
 (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
 
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)
+   (emacs-lisp . t)
+   (js . t)
+   (python . t)
+   (sh . t)
+   (sql . t)))
+
 ;; Autocomplete mode
 (require 'auto-complete-config)
 (ac-config-default)

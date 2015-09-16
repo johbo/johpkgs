@@ -186,6 +186,22 @@ Keep two levels and include all agenda files for refiling.
 
 Definition is in "org-refile-targets".
 
+** Babel
+
+Activate a few more languages for code blocks, this allows for "literate
+programming" or other things which might then be called "literate devops" or
+"literate support".
+
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((dot . t)
+     (emacs-lisp . t)
+     (js . t)
+     (python . t)
+     (sh . t)
+     (sql . t)))
+#+END_SRC
 * Programming
 
 #+BEGIN_SRC emacs-lisp
