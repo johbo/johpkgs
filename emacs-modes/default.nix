@@ -99,6 +99,20 @@ in rec {
 
   d = callPackage ./d { };
 
+  feature-mode = melpaBuild rec {
+    pname = "feature-mode";
+    version = "0.4";
+    src = fetchFromGitHub {
+      owner = "michaelklishin";
+      repo = "cucumber.el";
+      rev = "40886bc4cc5b1e855d6bb78505ebc651593d409d";
+      sha256 = "18b27xfajhd0vi7dcaky7pi7vmnlmdb88gkx3hwangj78d24as5d";
+    };
+    meta = {
+      description = " Emacs mode for editing Cucumber plain text stories";
+    };
+  };
+
   flx = melpaBuild rec {
     pname = "flx";
     version = "0.6-pre";

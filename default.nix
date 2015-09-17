@@ -31,6 +31,7 @@ let
         pkgs.emacsPackagesNg.projectile
         emacsPackages.autoComplete
         emacsPackages.d
+        emacsPackages.feature-mode
         emacsPackages.flx-ido
         emacsPackages.jedi
         # TODO: Find out why jedi does not fill this in automatically
