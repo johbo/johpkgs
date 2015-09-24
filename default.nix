@@ -28,6 +28,7 @@ let
         emacs
         pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.magit
+        pkgs.emacsPackagesNg.multiple-cursors
         pkgs.emacsPackagesNg.projectile
         emacsPackages.autoComplete
         emacsPackages.d
