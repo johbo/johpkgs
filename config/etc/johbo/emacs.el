@@ -82,6 +82,8 @@
 (setq org-directory "~/n")
 (setq org-default-notes-file (concat org-directory "/capture.org"))
 
+(setq org-export-backends '(ascii html icalendar latex beamer man md odt))
+
 ;; Org mode configuration
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)

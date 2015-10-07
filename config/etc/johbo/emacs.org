@@ -133,6 +133,11 @@ Allow narrowing, it is very useful together with org mode.
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 #+END_SRC
 
+** Export configuration
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-export-backends '(ascii html icalendar latex beamer man md odt))
+#+END_SRC
 ** Keys
 
 #+BEGIN_SRC emacs-lisp
