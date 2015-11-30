@@ -123,6 +123,16 @@ Allow narrowing, it is very useful together with org mode.
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   ;;(setq-default show-trailing-whitespace t)
 #+END_SRC
+** Tramp
+
+Found a [[http://www.emacswiki.org/emacs/TrampMode][hint]] in the emacswiki to configure =tramp-shell-prompt-pattern=, so
+that it will recognize the login prompt on [[http://nixos.org][NixOS]] machines:
+
+#+BEGIN_SRC emacs-lisp
+  (setq tramp-shell-prompt-pattern
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+#+END_SRC
+
 * Org mode configuration
 
 ** Directories

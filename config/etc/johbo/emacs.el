@@ -78,6 +78,9 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 ;;(setq-default show-trailing-whitespace t)
 
+(setq tramp-shell-prompt-pattern
+      "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+
 (setq org-agenda-files (quote ("~/n" "~/n/hr")))
 (setq org-directory "~/n")
 (setq org-default-notes-file (concat org-directory "/capture.org"))
