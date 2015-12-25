@@ -121,6 +121,8 @@
    (sh . t)
    (sql . t)))
 
+(setq-default c-basic-offset 4)
+
 ;; Autocomplete mode
 (require 'auto-complete-config)
 (ac-config-default)
