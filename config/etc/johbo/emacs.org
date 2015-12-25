@@ -83,7 +83,7 @@ Need a way to write out a PID file so that I can manage =emacs-server= with
 
 * General
 
-Misc things
+** Misc things
 
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-startup-message t)
