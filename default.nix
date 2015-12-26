@@ -99,14 +99,15 @@ let
       };
     };
 
-    epc = pkgs.lib.overrideDerivation pkgs.pythonPackages.epc (oldAttr: rec {
+    epc = buildPythonPackage rec {
       name = "epc-0.0.5";
       src = pkgs.fetchurl {
         url = "http://pypi.python.org/packages/source/e/epc/${name}.tar.gz";
         md5 = "de54a24ace8a9b3f5b2d8f014b8c4a42";
       };
       propagatedBuildInputs = [ sexpdata ];
-    });
+      doCheck = false;
+    };
 
     flake8 = pkgs.lib.overrideDerivation pkgs.pythonPackages.flake8 (oldAttr: rec {
       propagatedBuildInputs = oldAttr.propagatedBuildInputs ++ [
