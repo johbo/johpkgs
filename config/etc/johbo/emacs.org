@@ -218,6 +218,7 @@ programming" or other things which might then be called "literate devops" or
      (sql . t)))
 #+END_SRC
 * Programming
+** Misc basics
 
 #+BEGIN_SRC emacs-lisp
   (setq-default c-basic-offset 4)
@@ -233,7 +234,7 @@ programming" or other things which might then be called "literate devops" or
 #+END_SRC
 ** Auto completion
 
-Setting up auto complestion based on http://auto-complete.org/
+Setting up auto completion based on http://auto-complete.org/
 
 #+BEGIN_SRC emacs-lisp
   ;; Autocomplete mode
@@ -258,10 +259,47 @@ Setting up auto complestion based on http://auto-complete.org/
   (push '((d-mode . "stroustrup")) c-default-style)
 #+END_SRC
 
-* Programming in Python
+** Auto completion for D
+
+Configure auto completion for D using the following tools:
+
+- `dcd` is the D completion daemon.
+
+  The repository is at https://github.com/Hackerpilot/DCD
+
+- `ac-dcd` is the client part for emacs, so that it can be used.
+
+  The repository is at https://github.com/atilaneves/ac-dcd
 
 #+BEGIN_SRC emacs-lisp
-  ;; JEDI as completion plugin for Python
+  (require 'ac-dcd)
+  (add-hook
+   'd-mode-hook
+   (lambda ()
+     (auto-complete-mode t)
+     (when (featurep 'yasnippet) (yas-minor-mode-on))
+     (ac-dcd-maybe-start-server)
+     (ac-dcd-add-imports)
+     (add-to-list 'ac-sources 'ac-source-dcd)
+     (define-key d-mode-map (kbd "C-c ?") 'ac-dcd-show-ddoc-with-buffer)
+     (define-key d-mode-map (kbd "C-c .") 'ac-dcd-goto-definition)
+     (define-key d-mode-map (kbd "C-c ,") 'ac-dcd-goto-def-pop-marker)
+     (define-key d-mode-map (kbd "C-c s") 'ac-dcd-search-symbol)
+
+     (when (featurep 'popwin)
+       (add-to-list 'popwin:special-display-config
+                    `(,ac-dcd-error-buffer-name :noselect t))
+       (add-to-list 'popwin:special-display-config
+                    `(,ac-dcd-document-buffer-name :position right :width 80))
+       (add-to-list 'popwin:special-display-config
+                    `(,ac-dcd-search-symbol-buffer-name :position bottom :width 5)))))
+#+END_SRC
+
+* Programming in Python
+
+Add Jedi as source for autocompletion when working with python files.
+
+#+BEGIN_SRC emacs-lisp
   (add-to-list 'ac-sources 'ac-source-jedi-direct)
   (setq jedi:complete-on-dot t)
   (add-hook 'python-mode-hook 'jedi:setup)
@@ -274,8 +312,9 @@ Setting up auto complestion based on http://auto-complete.org/
 
 * Programming in Nix
 
+Load `nix-mode`.
+
 #+BEGIN_SRC emacs-lisp
-  ;; Register nix mode
   (autoload 'nix-mode "nix-mode" "Major mode for editing Nix expressions." t)
   (push '("\\.nix\\'" . nix-mode) auto-mode-alist)
   (push '("\\.nix.in\\'" . nix-mode) auto-mode-alist)

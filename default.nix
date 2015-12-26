@@ -26,7 +26,11 @@ let
 
       paths = [
         emacs
+
+        # completion tools for D
         pkgs.emacsPackagesNg.ac-dcd
+        pkgs.dcd
+
         pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.magit
         pkgs.emacsPackagesNg.multiple-cursors
