@@ -26,6 +26,7 @@ let
 
       paths = [
         emacs
+        pkgs.emacsPackagesNg.ac-dcd
         pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.magit
         pkgs.emacsPackagesNg.multiple-cursors
