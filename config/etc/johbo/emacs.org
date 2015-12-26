@@ -222,10 +222,6 @@ programming" or other things which might then be called "literate devops" or
 #+BEGIN_SRC emacs-lisp
   (setq-default c-basic-offset 4)
 
-  ;; Autocomplete mode
-  (require 'auto-complete-config)
-  (ac-config-default)
-
   ;; Projectile
   (require 'projectile)
   (projectile-global-mode)
@@ -234,6 +230,15 @@ programming" or other things which might then be called "literate devops" or
   (require 'flycheck)
   (add-hook 'after-init-hook 'global-flycheck-mode)
   (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
+#+END_SRC
+** Auto completion
+
+Setting up auto complestion based on http://auto-complete.org/
+
+#+BEGIN_SRC emacs-lisp
+  ;; Autocomplete mode
+  (require 'auto-complete-config)
+  (ac-config-default)
 #+END_SRC
 
 ** Web formats
