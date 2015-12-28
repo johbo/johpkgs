@@ -1,13 +1,14 @@
 {stdenv, fetchurl, emacs}:
 
-let version = "20150111";
+let version = "20151228";
 
 in stdenv.mkDerivation {
   name = "emacs-d-${version}";
 
+  # TODO : 5501b77a1e212e27dd78e8c0e86424064b439cbb
   src = fetchurl {
-    url = "https://github.com/Emacs-D-Mode-Maintainers/Emacs-D-Mode/archive/53efec4d83c7cee8227597f010fe7fc400ff05f1.tar.gz";
-    sha256 = "0vb0za51lc6qf1qgqisap4vzk36caa5k17zajjn034rhjsqfw0w7";
+    url = "https://github.com/Emacs-D-Mode-Maintainers/Emacs-D-Mode/archive/5501b77a1e212e27dd78e8c0e86424064b439cbb.tar.gz";
+    sha256 = "1zb6ci6abnvdhrv5r88fjgyjvca3w2277vk1skx5sjcq9pccch50";
   };
 
   buildInputs = [ emacs ];
