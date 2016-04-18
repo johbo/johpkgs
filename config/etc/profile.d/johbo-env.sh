@@ -32,8 +32,7 @@ export LANG=en_US.UTF-8
 
 
 # Postgres development setup
-# TODO: Change to something which does not have "tmp" in it
-export PGDATA=$HOME/tmp/pgdata
+export PGDATA=$HOME/var/lib/postgres/9.5
 
 
 # Prompt tweaks
