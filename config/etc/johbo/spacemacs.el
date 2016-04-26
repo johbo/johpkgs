@@ -47,5 +47,6 @@
 ;;     (sql . t)))
 
 (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
+(setq python-fill-docstring-style (quote django))
 
 ;;(push '((d-mode . "stroustrup")) c-default-style)

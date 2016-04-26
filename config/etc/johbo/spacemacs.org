@@ -100,10 +100,11 @@ programming" or other things which might then be called "literate devops" or
 ;;     (sh . t)
 ;;     (sql . t)))
 #+END_SRC
-* Programming
+* Programming in Python
 
 #+BEGIN_SRC emacs-lisp
  (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
+ (setq python-fill-docstring-style (quote django))
 #+END_SRC
 
 * Programming in D
