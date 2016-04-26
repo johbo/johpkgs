@@ -46,7 +46,7 @@ that it will recognize the login prompt on [[http://nixos.org][NixOS]] machines:
 ** Export configuration
 
 #+BEGIN_SRC emacs-lisp
-  (setq org-export-backends '(ascii html icalendar latex beamer man md odt))
+  (setq org-export-backends '(ascii confluence html icalendar latex beamer man md odt))
 #+END_SRC
 ** Capturing
 
@@ -111,4 +111,3 @@ programming" or other things which might then be called "literate devops" or
 #+BEGIN_SRC emacs-lisp
   ;;(push '((d-mode . "stroustrup")) c-default-style)
 #+END_SRC
-

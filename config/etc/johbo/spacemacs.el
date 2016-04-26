@@ -16,7 +16,7 @@
 (setq org-directory "~/n")
 (setq org-default-notes-file (concat org-directory "/capture.org"))
 
-(setq org-export-backends '(ascii html icalendar latex beamer man md odt))
+(setq org-export-backends '(ascii confluence html icalendar latex beamer man md odt))
 
 (setq org-capture-templates
  '(("t" "Tasks" entry (file+headline (concat org-directory "/capture.org")
