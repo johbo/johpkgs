@@ -18,6 +18,9 @@ then
 fi
 
 
+export NIX_PATH=ssh-config-file=$HOME/etc/ssh/nix-default-conf:$NIX_PATH
+
+
 if [ -n "$foundEmacs" ]
 then
     export ALTERNATE_EDITOR=""
