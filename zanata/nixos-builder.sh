@@ -9,14 +9,16 @@ mkdir -p $logDir
 chown -R $user $logDir
 export PATH=$PATH:$su/bin
 
+echo $zanata > $logDir/path-zanata
+echo $out > $logDir/path-control
+
 start()
 {
-  su $user -s /bin/sh -c "$jboss/bin/standalone.sh \
+  su $user -s /bin/sh -c "$zanata/bin/standalone.sh \
       -Djboss.server.base.dir=$serverDir \
-      -Djboss.server.base.url=file://$serverDir \
       -Djboss.server.temp.dir=$tempDir \
       -Djboss.server.log.dir=$logDir \
-      -P=$serverDir/configuration/zanata.properties
+      -P=$serverDir/configuration/zanata.properties \
       -c standalone-zanata.xml"
 }
 
@@ -46,7 +48,7 @@ then
   rm -rf $serverDir
   mkdir -p $serverDir
   cd $serverDir
-  cp -av $zanata/standalone .
+  cp -av $zanata/standalone/* .
 
   # Make files accessible for the server user
   chown -R $user $serverDir

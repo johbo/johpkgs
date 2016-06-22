@@ -13,7 +13,8 @@ let
   zanataService = pkgs.stdenv.mkDerivation {
     name = "zanata-server";
     builder = ./nixos-builder.sh;
-    inherit (pkgs) zanata su;
+    inherit zanata;
+    inherit (pkgs) su;
     inherit (cfg) tempDir logDir libUrl deployDir serverDir user useJK;
   };
 
@@ -44,7 +45,7 @@ in
 
       serverDir = mkOption {
         description = "Location of the server instance files";
-        default = "/var/zanata/server";
+        default = "/var/lib/zanata";
       };
 
       deployDir = mkOption {
@@ -58,8 +59,13 @@ in
       };
 
       user = mkOption {
-        default = "nobody";
-        description = "User account under which jboss runs.";
+        default = "zanata";
+        description = "User under which the Zanata server runs.";
+      };
+
+      group = mkOption {
+        default = "zanata";
+        description = "Group for the Zanata user.";
       };
 
       useJK = mkOption {
@@ -80,5 +86,14 @@ in
       script = "${zanataService}/bin/control start";
       wantedBy = [ "multi-user.target" ];
     };
+
+    users.users.${config.services.zanata.user} = {
+      description = "Zanata server user";
+      group = config.services.zanata.group;
+      home = config.services.zanata.serverDir;
+    };
+
+    users.groups.${config.services.zanata.group} = {};
+
   };
 }
