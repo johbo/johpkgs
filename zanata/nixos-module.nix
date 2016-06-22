@@ -80,20 +80,42 @@ in
 
   ###### implementation
 
-  config = mkIf config.services.zanata.enable {
+  config = mkIf cfg.enable {
     systemd.services.zanata = {
       description = "Zanata server";
       script = "${zanataService}/bin/control start";
       wantedBy = [ "multi-user.target" ];
+      preStart = ''
+        if [ ! -e ${cfg.serverDir} ]
+        then
+          echo "Creating Zanata server directory in ${cfg.serverDir}."
+          mkdir -p ${cfg.serverDir}
+          cd ${cfg.serverDir}
+          cp -av ${zanata}/standalone/* .
+
+          # Make files accessible for the server user
+          chown -R ${cfg.user}: ${cfg.serverDir}
+          for i in `find ${cfg.serverDir} -type d`
+          do
+            chmod 755 $i
+          done
+          for i in `find ${cfg.serverDir} -type f`
+          do
+            chmod 644 $i
+          done
+        else
+          echo "Zanata server directory is already present in ${cfg.serverDir}."
+        fi
+      '';
     };
 
-    users.users.${config.services.zanata.user} = {
+    users.users.${cfg.user} = {
       description = "Zanata server user";
-      group = config.services.zanata.group;
-      home = config.services.zanata.serverDir;
+      group = cfg.group;
+      home = cfg.serverDir;
     };
 
-    users.groups.${config.services.zanata.group} = {};
+    users.groups.${cfg.group} = {};
 
   };
 }

@@ -35,31 +35,6 @@ then
 elif test "\$1" = stop
 then
   stop
-elif test "\$1" = init
-then
-  echo "Are you sure you want to create a new server instance (old server instance will be lost!)?"
-  read answer
-
-  if ! test \$answer = "yes"
-  then
-    exit 1
-  fi
-
-  rm -rf $serverDir
-  mkdir -p $serverDir
-  cd $serverDir
-  cp -av $zanata/standalone/* .
-
-  # Make files accessible for the server user
-  chown -R $user $serverDir
-  for i in \`find $serverDir -type d\`
-  do
-    chmod 755 \$i
-  done
-  for i in \`find $serverDir -type f\`
-  do
-    chmod 644 \$i
-  done
 fi
 EOF
 
