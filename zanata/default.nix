@@ -26,6 +26,11 @@ in stdenv.mkDerivation {
     # The installation idea is to extract it on top of jboss,
     # see http://docs.zanata.org/en/release/user-guide/system-admin/configuration/installation/
     unzip ${zanata-src} -d $out
+
+    substituteInPlace $out/standalone/configuration/standalone-zanata.xml \
+      --replace \
+        '<!--<simple name="java:global/zanata/security/admin-users" value="" />-->' \
+        '<simple name="java:global/zanata/security/admin-users" value="admin" />'
   '';
 
 }
