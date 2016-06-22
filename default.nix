@@ -171,6 +171,8 @@ let
       };
     });
 
+    zanata = callPackage ./zanata {};
+
   };
 in
 self
