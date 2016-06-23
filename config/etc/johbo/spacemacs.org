@@ -1,0 +1,114 @@
+#+PROPERTY: header-args :tangle yes :results value silent
+
+* OS integration
+** Emacs server
+
+*** PID file hacks
+
+Need a way to write out a PID file so that I can manage =emacs-server= with
+=supervisord= both on Linux and MacOS.
+
+#+BEGIN_SRC emacs-lisp
+  ;; Write a PID file if we are a daemon, so that supervisord can manage us with
+  ;; pidproxy
+  (defun my/write-pid-file ()
+    "Write the Emacs PID into a file"
+    (let ((pid-file "~/var/run/emacs-server.pid")
+          (pid (number-to-string (emacs-pid))))
+      (with-temp-file pid-file (insert pid))))
+
+  (if (daemonp)
+      (my/write-pid-file))
+#+END_SRC
+
+* General
+
+** Tramp
+
+Found a [[http://www.emacswiki.org/emacs/TrampMode][hint]] in the emacswiki to configure =tramp-shell-prompt-pattern=, so
+that it will recognize the login prompt on [[http://nixos.org][NixOS]] machines:
+
+#+BEGIN_SRC emacs-lisp
+  (setq tramp-shell-prompt-pattern
+        "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+#+END_SRC
+
+* Org mode configuration
+
+** Directories
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-agenda-files (quote ("~/n" "~/n/hr")))
+  (setq org-directory "~/n")
+  (setq org-default-notes-file (concat org-directory "/capture.org"))
+#+END_SRC
+
+** Export configuration
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-export-backends '(ascii confluence html icalendar latex beamer man md odt))
+#+END_SRC
+** Capturing
+
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-capture-templates
+   '(("t" "Tasks" entry (file+headline (concat org-directory "/capture.org")
+                                       "Refile Tasks")
+      "* TODO %?\n  %i\n  %a")
+     ("j" "Journal" entry (file+datetree (concat org-directory "/journal.org"))
+      "* %?\nEntered on %U\n  %i\n  %a")
+     ("f" "Feedback" entry (file+datetree (concat org-directory "/hr/feedback.org"))
+      "* %?\nEntered on %U\n  %i\n  %a")
+     ("d" "Daily" entry (file+headline (concat org-directory "/daily.org")
+                                       "Since the last daily"))
+     ))
+#+END_SRC
+** Agenda
+
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
+
+** Refiling configuration
+
+Keep two levels and include all agenda files for refiling.
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-refile-use-outline-path t)
+  (setq org-outline-path-complete-in-steps t)
+  (setq org-refile-allow-creating-parent-nodes nil)
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
+#+END_SRC
+
+** TODO refile targets
+
+Definition is in "org-refile-targets".
+
+** Babel
+
+Activate a few more languages for code blocks, this allows for "literate
+programming" or other things which might then be called "literate devops" or
+"literate support".
+
+#+BEGIN_SRC emacs-lisp
+;;  (org-babel-do-load-languages
+;;   'org-babel-load-languages
+;;   '((dot . t)
+;;     (emacs-lisp . t)
+;;     (js . t)
+;;     (python . t)
+;;     (sh . t)
+;;     (sql . t)))
+#+END_SRC
+* Programming in Python
+
+#+BEGIN_SRC emacs-lisp
+ (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
+ (setq python-fill-docstring-style (quote django))
+#+END_SRC
+
+* Programming in D
+
+#+BEGIN_SRC emacs-lisp
+  ;;(push '((d-mode . "stroustrup")) c-default-style)
+#+END_SRC
