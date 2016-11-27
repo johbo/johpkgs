@@ -5,15 +5,13 @@
     ))
 
 (defun config-johbo/post-init-org ()
-  (message "config-johbo: Configuring org")
-
   ;; Agenda configuration
   (setq org-agenda-files (quote ("~/n" "~/n/hr")))
   (setq org-directory "~/n")
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 
   ;; Export backends
-  (setq org-export-backends '(ascii jira html icalendar latex beamer man md odt))
+  (setq org-export-backends '(ascii jira html icalendar beamer md odt))
 
   ;; Capturing
   (setq org-capture-templates
@@ -38,5 +36,4 @@
   (setq org-outline-path-complete-in-steps t)
   (setq org-refile-allow-creating-parent-nodes nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
-
   )
