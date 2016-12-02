@@ -21,7 +21,9 @@
           ("b" "Blog" entry (file+headline (concat org-directory "/capture.org")
                                            "Blog Topics")
            "* TODO %?\n\nEntered on %U\n  %i\n  %a")
-
+          ("w" "Twitter" entry (file+headline (concat org-directory "/capture.org")
+                                           "Twitter out")
+           "* %?\nEntered on %U\n  %i\n  %a")
           ("l" "Lead" entry (file+headline (concat org-directory "/capture.org")
                                            "Leads")
            "* TODO %?\n\nEntered on %U\n  %i\n  %a")
