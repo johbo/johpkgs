@@ -105,6 +105,9 @@
       ;; OK, at this point we tbls as a list of tables, one per file
       (setq tbls (nreverse tbls))
 
+      ;; Skip days without any values
+      (setq tbls (seq-filter (lambda (x) (/= 0 (nth 1 x))) tbls))
+
       (setq params (plist-put params :multifile scope-is-list))
       (setq params (plist-put params :one-file-with-archives
                               one-file-with-archives))
@@ -114,7 +117,6 @@
       ;; (insert (pp-to-string tbls))
 
       )))
-
 
 
 (defun my/format-daily-clocktables (ipos tables params)
