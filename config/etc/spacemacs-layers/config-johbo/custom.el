@@ -100,19 +100,23 @@
                       (throw 'exit nil))))
               (org-narrow-to-subtree)))
             ;; do the table, with no file name.
-            (push (org-clock-get-table-data nil p1) tbls))))
+            (setq tbl (org-clock-get-table-data (plist-get p1 :tstart) p1))
+            (unless (= 0 (nth 1 tbl))
+              (push tbl tbls)
+              )
+            )))
 
       ;; OK, at this point we tbls as a list of tables, one per file
       (setq tbls (nreverse tbls))
 
       ;; Skip days without any values
-      (setq tbls (seq-filter (lambda (x) (/= 0 (nth 1 x))) tbls))
+      ;; (setq tbls (seq-filter (lambda (x) (/= 0 (nth 1 x))) tbls))
 
       (setq params (plist-put params :multifile scope-is-list))
       (setq params (plist-put params :one-file-with-archives
                               one-file-with-archives))
 
-      (funcall formatter ipos tbls params)
+      (my/format-daily-clocktables ipos tbls params)
       ;; (goto-char ipos)
       ;; (insert (pp-to-string tbls))
 
@@ -197,12 +201,14 @@ from the dynamic block definition."
                   (not (plist-get params :fileskip0)))
           (insert-before-markers "|-\n")  ; a hline because a new file starts
 
+          (setq tbl-day (nth 0 tbl))
           ;; Get the list of node entries and iterate over it
           (setq entries (nth 2 tbl))
           (while (setq entry (pop entries))
             (setq level (car entry)
                   headline (nth 1 entry)
-                  hlc (if emph (or (cdr (assoc level hlchars)) "") ""))
+                  hlc (if emph (or (cdr (assoc level hlchars)) "") "")
+                  hlts (if (= 1 level) (concat " " tbl-day) ""))
             (when narrow-cut-p
               (if (and (string-match (concat "\\`" org-bracket-link-regexp
                                              "\\'")
@@ -225,7 +231,7 @@ from the dynamic block definition."
                    (lambda (p) (or (cdr (assoc p (nth 4 entry))) ""))
                    properties "|") "|") "")  ;properties columns, maybe
              (if indent (org-clocktable-indent-string level) "") ; indentation
-             hlc headline hlc "|"                                ; headline
+             hlc headline hlc hlts "|"                                ; headline
              (make-string (min (1- ntcol) (or (- level 1))) ?|)
                                         ; empty fields for higher levels
              hlc (org-minutes-to-clocksum-string (nth 3 entry)) hlc ; time
