@@ -78,7 +78,7 @@
                 (with-current-buffer (find-buffer-visiting file)
                   (save-excursion
                     (save-restriction
-                      (push (org-clock-get-table-data file params) tbls))))))
+                      (push (org-clock-get-table-data (plist-get p1 :tstart) p1) tbls))))))
           ;; Just from the current file
           (save-restriction
             ;; get the right range into the restriction
