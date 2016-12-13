@@ -10,6 +10,7 @@
            (ws (plist-get params :wstart))
            (ms (plist-get params :mstart))
            (step 86400)
+           (dump-data (plist-get params :dump-data))
            (formatter (or (plist-get params :formatter)
                           org-clock-clocktable-formatter
                           'org-clocktable-write-default))
@@ -117,10 +118,13 @@
                               one-file-with-archives))
 
       ;; (my/format-daily-clocktables ipos tbls params)
-      (funcall formatter ipos tbls params)
-      ;; (goto-char ipos)
-      ;; (insert (pp-to-string tbls))
-
+      (if dump-data
+          (progn
+           (goto-char ipos)
+           (insert (pp-to-string tbls))
+           )
+        (funcall formatter ipos tbls params)
+        )
       )))
 
 
