@@ -116,7 +116,8 @@
       (setq params (plist-put params :one-file-with-archives
                               one-file-with-archives))
 
-      (my/format-daily-clocktables ipos tbls params)
+      ;; (my/format-daily-clocktables ipos tbls params)
+      (funcall formatter ipos tbls params)
       ;; (goto-char ipos)
       ;; (insert (pp-to-string tbls))
 
@@ -189,6 +190,20 @@ from the dynamic block definition."
      (if properties (concat (mapconcat 'identity properties "|") "|") "") ;properties columns, maybe
      (concat (nth 4 lwords) "|"
              (nth 5 lwords) "|\n"))                 ; headline and time columns
+
+    ;; Insert the total time in the table
+    (insert-before-markers
+     "|-\n"                            ; a hline
+     "|"                               ; table line starter
+     (if multifile (concat "| " (nth 6 lwords) " ") "")
+                                        ; file column, maybe
+     (if level-p   "|"      "")        ; level column, maybe
+     (if timestamp "|"      "")        ; timestamp column, maybe
+     (if properties (make-string (length properties) ?|) "")  ; properties columns, maybe
+     (concat (format org-clock-total-time-cell-format (nth 7 lwords))  "| ") ; instead of a headline
+     (format org-clock-total-time-cell-format
+             (org-minutes-to-clocksum-string (or total-time 0))) ; the time
+     "|\n")                          ; close line
 
     ;; Now iterate over the tables and insert the data
     ;; but only if any time has been collected
