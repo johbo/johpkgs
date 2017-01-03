@@ -14,7 +14,9 @@
    git
    markdown
    d
-   emoji
+   ;; This screws with my holy org files
+   ;; See https://github.com/syl20bnr/emacs-emoji-cheat-sheet-plus/issues/5
+   ;; emoji
    imenu-list
    (python :variables
            python-sort-imports-on-save t
