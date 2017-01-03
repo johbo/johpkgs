@@ -39,4 +39,5 @@
 
    (osx :variables
         mac-right-option-modifier nil)
+   botech
    ))

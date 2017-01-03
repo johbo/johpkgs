@@ -1,5 +1,7 @@
 (defun org-dblock-write:clockdaytable (params)
   "Write the standard clocktable."
+  (message "Requiring org clock")
+  (require 'org-clock)
   (setq params (org-combine-plists org-clocktable-defaults params))
   (catch 'exit
     (let* ((p1 (copy-sequence params))
