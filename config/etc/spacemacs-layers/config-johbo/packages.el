@@ -89,7 +89,7 @@ Additionally reposition the window."
 
   ;; Refiling
   (setq org-refile-use-outline-path t)
-  (setq org-outline-path-complete-in-steps t)
+  (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-allow-creating-parent-nodes nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
   )
