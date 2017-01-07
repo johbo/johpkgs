@@ -54,6 +54,8 @@ Additionally reposition the window."
 (defun config-johbo/post-init-org ()
   ;; Keys
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "ob" 'org-babel-demarcate-block)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "oc" 'org-cut-special)
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode "op" 'org-paste-special)
 
   ;; Agenda configuration
   (setq org-agenda-files (quote ("~/n" "~/n/hr")))
