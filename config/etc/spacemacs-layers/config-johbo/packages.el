@@ -58,6 +58,11 @@ Additionally reposition the window."
   )
 
 (defun config-johbo/post-init-jabber ()
+  (spacemacs/set-leader-keys "aj" nil)
+  (spacemacs/declare-prefix "aj" "jabber-prefix")
+  (spacemacs/set-leader-keys
+    "ajj" 'jabber-connect-all
+    "ajr" 'jabber-switch-to-roster-buffer)
   (spacemacs|use-package-add-hook jabber
     :post-config
     (progn
@@ -65,6 +70,10 @@ Additionally reposition the window."
       ;; SPC TAB
       (add-to-list 'spacemacs-useful-buffers-regexp "\\*-jabber.*\\-*")
       (add-hook 'jabber-post-connect-hooks 'jabber-muc-autojoin t)
+
+      (spacemacs/set-leader-keys-for-major-mode 'jabber-chat-mode
+        "q" 'bury-buffer
+        "r" 'jabber-switch-to-roster-buffer)
       )
     )
   )
