@@ -4,6 +4,7 @@
     flycheck
     helm
     imenu-list
+    jabber
     org
     ox-jira
     ox-rst
@@ -54,6 +55,18 @@ Additionally reposition the window."
         )))
   (advice-add 'imenu-list-display-entry :override 'my-imenu-list-display-entry)
   (advice-add 'imenu-list-goto-entry :after 'my-reposition-wrapper)
+  )
+
+(defun config-johbo/post-init-jabber ()
+  (spacemacs|use-package-add-hook jabber
+    :post-config
+    (progn
+      (setq jabber-auto-reconnect t)
+      ;; SPC TAB
+      (add-to-list 'spacemacs-useful-buffers-regexp "\\*-jabber.*\\-*")
+      (add-hook 'jabber-post-connect-hooks 'jabber-muc-autojoin t)
+      )
+    )
   )
 
 (defun config-johbo/post-init-org ()
