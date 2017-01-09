@@ -2,6 +2,7 @@
   '(
     editorconfig
     flycheck
+    helm
     imenu-list
     org
     ox-jira
@@ -20,6 +21,10 @@
 
 (defun config-johbo/post-init-flycheck ()
   (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
+  )
+
+(defun config-johbo/post-init-helm ()
+  (setq helm-buffer-max-length 70)
   )
 
 (defun config-johbo/post-init-imenu-list ()
