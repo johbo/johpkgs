@@ -34,3 +34,24 @@
 (setq js2-dynamic-idle-timer-adjust 10000)
 ;;  (setq js2-concat-multiline-strings eol)
 (setq js2-language-version 200)
+
+;; Layout for Chat handling
+(defvar chat-spacemacs-layout-name "@Chat"
+  "Name used for the chats layout")
+(defvar chat-spacemacs-layout-bindind "c"
+  "Binding key to access the custom chat layout.")
+
+(spacemacs|define-custom-layout chat-spacemacs-layout-name
+  :binding "c"
+  :body
+  (progn
+    (defun spacemacs-layouts/add-chat-buffer-to-persp ()
+      (persp-add-buffer (current-buffer)
+                        (persp-get-by-name
+                         chat-spacemacs-layout-name)))
+    (add-hook 'jabber-chat-mode-hook #'spacemacs-layouts/add-chat-buffer-to-persp)
+    (add-hook 'jabber-roster-mode-hook #'spacemacs-layouts/add-chat-buffer-to-persp)
+    (jabber-connect-all)
+    (add-hook 'erc-mode-hook #'spacemacs-layouts/add-chat-buffer-to-persp)
+    (erc-tls)
+    ))
