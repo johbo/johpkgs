@@ -61,6 +61,8 @@ Additionally reposition the window."
   (spacemacs/set-leader-keys "aj" nil)
   (spacemacs/declare-prefix "aj" "jabber-prefix")
   (spacemacs/set-leader-keys
+    "aja" 'jabber-send-default-presence
+    "aji" 'jabber-activity-switch-to
     "ajj" 'jabber-connect-all
     "ajr" 'jabber-switch-to-roster-buffer)
   (spacemacs|use-package-add-hook jabber
