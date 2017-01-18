@@ -90,7 +90,7 @@ Additionally reposition the window."
                  (shell-quote-argument group))))
       (defun my/do-notify (from buffer text title) t)
       (defun my/do-notify-muc (from group buffer text title)
-        (when (string-match ".*johbo.*" text) t)
+        (when (string-match (concat ".*" (jabber-my-nick group) ".*") text) t)
         ;; (if (jabber-muc-looks-like-personal-p text group) t nil)
         )
       (defun my/notify-jabber-message (from buffer text title)
