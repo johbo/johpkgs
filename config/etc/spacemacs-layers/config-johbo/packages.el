@@ -61,7 +61,8 @@ Additionally reposition the window."
   (spacemacs/set-leader-keys "aj" nil)
   (spacemacs/declare-prefix "aj" "jabber-prefix")
   (spacemacs/set-leader-keys
-    "aja" 'jabber-send-default-presence
+    "ajA" 'jabber-send-default-presence
+    "aja" 'jabber-send-presence
     "aji" 'jabber-activity-switch-to
     "ajj" 'jabber-connect-all
     "ajr" 'jabber-switch-to-roster-buffer)
@@ -74,6 +75,8 @@ Additionally reposition the window."
       (add-hook 'jabber-post-connect-hooks 'jabber-muc-autojoin t)
 
       (spacemacs/set-leader-keys-for-major-mode 'jabber-chat-mode
+        "A" 'jabber-send-default-presence
+        "a" 'jabber-send-presence
         "q" 'bury-buffer
         "r" 'jabber-switch-to-roster-buffer)
       )
