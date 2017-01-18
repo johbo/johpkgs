@@ -83,11 +83,11 @@ Additionally reposition the window."
       ;; notifications for jabber on osx
       (defun my/msg-via-notifier (title msg group)
         (shell-command
-        (format "%s -sender org.gnu.Emacs -title %s -message %s -group %s"
-                my/cmd-terminal-notifier
-                (shell-quote-argument title)
-                (shell-quote-argument msg)
-                (shell-quote-argument group))))
+         (format "%s -sender org.gnu.Emacs -title %s -message %s -group %s"
+                 my/cmd-terminal-notifier
+                 (shell-quote-argument title)
+                 (shell-quote-argument msg)
+                 (shell-quote-argument group))))
       (defun my/do-notify (from buffer text title) t)
       (defun my/do-notify-muc (from group buffer text title)
         (when (string-match ".*johbo.*" text) t)
@@ -95,15 +95,16 @@ Additionally reposition the window."
         )
       (defun my/notify-jabber-message (from buffer text title)
         (when (my/do-notify from buffer text title)
-            (my/msg-via-notifier from text from)
+          (my/msg-via-notifier from text from)
           )
         )
       (add-hook 'jabber-alert-message-hooks 'my/notify-jabber-message)
       (defun my/notify-jabber-muc-message (from group buffer text title)
         (when (my/do-notify-muc from group buffer text title)
-            (my/msg-via-notifier from text group))
+          (my/msg-via-notifier from text group))
         )
       (add-hook 'jabber-alert-muc-hooks 'my/notify-jabber-muc-message)
+      )
     )
   )
 
