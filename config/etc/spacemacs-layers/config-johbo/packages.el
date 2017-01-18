@@ -79,7 +79,6 @@ Additionally reposition the window."
         "a" 'jabber-send-presence
         "q" 'bury-buffer
         "r" 'jabber-switch-to-roster-buffer)
-      )
 
       ;; notifications for jabber on osx
       (defun my/msg-via-notifier (title msg group)
