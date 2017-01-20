@@ -116,7 +116,7 @@ Additionally reposition the window."
     "op" 'org-paste-special)
 
   ;; Agenda configuration
-  (setq org-agenda-files (quote ("~/n" "~/n/hr")))
+  (setq org-agenda-files (quote ("~/n")))
   (setq org-directory "~/n")
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 
