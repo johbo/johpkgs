@@ -155,6 +155,9 @@ Additionally reposition the window."
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-allow-creating-parent-nodes nil)
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 2))))
+
+  ;; Misc
+  (setq org-startup-indented t)
   )
 
 (defun config-johbo/init-ox-jira ()
