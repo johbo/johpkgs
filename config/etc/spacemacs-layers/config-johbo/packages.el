@@ -121,7 +121,7 @@ Additionally reposition the window."
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 
   ;; Export backends
-  (setq org-export-backends '(ascii html icalendar beamer md odt))
+  (setq org-export-backends '(ascii html icalendar beamer md org odt))
 
   ;; Capturing
   (setq org-capture-templates
