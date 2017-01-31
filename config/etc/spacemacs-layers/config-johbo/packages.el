@@ -81,13 +81,16 @@ Additionally reposition the window."
         "r" 'jabber-switch-to-roster-buffer)
 
       ;; notifications for jabber on osx
-      (defun my/msg-via-notifier (title msg group)
+      (setq my/jabber-terminal-notifier-sound "Pop")
+      (defun my/msg-via-notifier (title msg group sound)
         (shell-command
-         (format "%s -sender org.gnu.Emacs -title %s -message %s -group %s"
+         (format "%s -sender org.gnu.Emacs -title %s -message %s -group %s -sound %s"
                  my/cmd-terminal-notifier
                  (shell-quote-argument title)
                  (shell-quote-argument msg)
-                 (shell-quote-argument group))))
+                 (shell-quote-argument group)
+                 (shell-quote-argument sound)
+                 )))
       (defun my/do-notify (from buffer text title) t)
       (defun my/do-notify-muc (from group buffer text title)
         (when (string-match (concat ".*" (jabber-my-nick group) ".*") text) t)
@@ -95,13 +98,13 @@ Additionally reposition the window."
         )
       (defun my/notify-jabber-message (from buffer text title)
         (when (my/do-notify from buffer text title)
-          (my/msg-via-notifier from text from)
+          (my/msg-via-notifier from text from my/jabber-terminal-notifier-sound)
           )
         )
       (add-hook 'jabber-alert-message-hooks 'my/notify-jabber-message)
       (defun my/notify-jabber-muc-message (from group buffer text title)
         (when (my/do-notify-muc from group buffer text title)
-          (my/msg-via-notifier from text group))
+          (my/msg-via-notifier from text group my/jabber-terminal-notifier-sound))
         )
       (add-hook 'jabber-alert-muc-hooks 'my/notify-jabber-muc-message)
       )
