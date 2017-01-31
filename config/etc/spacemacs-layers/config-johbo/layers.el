@@ -36,6 +36,7 @@
    ;; version-control
    erc
    shell-scripts
+   ansible
 
    (osx :variables
         mac-right-option-modifier nil)
