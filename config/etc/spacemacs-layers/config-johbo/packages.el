@@ -126,6 +126,9 @@ Additionally reposition the window."
   ;; Export backends
   (setq org-export-backends '(ascii html icalendar beamer md org odt))
 
+  ;; Link handling
+  (setq org-id-link-to-org-use-id t)
+
   ;; Capturing
   (setq org-capture-templates
         '(("t" "Tasks" entry (file+headline (concat org-directory "/capture.org")
