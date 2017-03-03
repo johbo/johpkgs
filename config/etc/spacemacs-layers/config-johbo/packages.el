@@ -153,6 +153,7 @@ Additionally reposition the window."
           ))
 
   ;; Clocking
+  (setq org-clock-out-remove-zero-time-clocks t)
   (setq org-time-clocksum-format (quote (:hours "%d" :require-hours t :minutes
                                                 ":%02d" :require-minutes t)))
 
