@@ -1,6 +1,5 @@
 (defun org-dblock-write:clockdaytable (params)
   "Write a modified clocktable with a per day resolution"
-  (message "Requiring org clock")
   (require 'org-clock)
   (setq params (org-combine-plists org-clocktable-defaults params))
   (catch 'exit
@@ -575,8 +574,8 @@ TIME:      The sum of all time spend in this tree, in minutes.  This time
 		 (setq p (next-single-property-change
 			  (point) :org-clock-minutes)))
 	(goto-char p)
-	(when (setq time (get-text-property p :org-clock-minutes)
-              clocklines (get-text-property p :botech-clocklines))
+	(when (setq clocklines (get-text-property p :botech-clocklines)
+              time (get-text-property p :org-clock-minutes))
 	  (save-excursion
 	    (beginning-of-line 1)
 	    (when (and (looking-at "\\(\\*+\\)[ \t]+\\(.*?\\)\\([ \t]+:[[:alnum:]_@#%:]+:\\)?[ \t]*$")
