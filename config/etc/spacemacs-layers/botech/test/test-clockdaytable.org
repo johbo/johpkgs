@@ -1,0 +1,105 @@
+
+* Tasks
+:PROPERTIES:
+:work_type: Programming
+:user:     testuser
+:END:
+
+** Times
+
+*** Export clocklines
+
+The dynamic block ~clockdaytable~ uses an adjusted implementation of
+~org-clock-sum~ which also makes each individual clock line available on the
+headline. This allows to create a table of all clock lines for a given month. We
+use the formatter ~botech/format-daily-clocklines~ for this.
+
+A clockline which spawns over midnight will be split up into two chunks, one per
+day.
+
+#+BEGIN: clockdaytable :tags "-notbill" :maxlevel 30 :scope file-with-archives :block 2017-03 :formatter botech/format-daily-clocklines :properties ("issue" "work_type" "user") :inherit-props t :dump-data nil :stepskip0 t :fileskip0 t
+|     Date | Issue |    Start |      End | Duration | Activity      | Employee |
+|----------+-------+----------+----------+----------+---------------+----------|
+| 17-03-03 |  1234 | 12:16:00 | 12:38:00 | 00:22:00 | Research      | testuser |
+| 17-03-03 |  1234 | 23:16:00 | 00:00:00 | 00:44:00 | Over Midnight | testuser |
+|----------+-------+----------+----------+----------+---------------+----------|
+| 17-03-04 |  1234 | 18:28:00 | 19:00:00 | 00:32:00 | Research      | testuser |
+| 17-03-04 |  1234 | 16:28:00 | 17:10:00 | 00:42:00 | Research      | testuser |
+| 17-03-04 |  1234 | 00:00:00 | 00:38:00 | 00:38:00 | Over Midnight | testuser |
+| 17-03-04 |  1234 | 20:16:00 | 20:32:00 | 00:16:00 | Test 2        | testuser |
+#+END:
+
+*** Export daily reports
+
+Originally the dynamic block ~clockdaytable~ had been created to create a clock
+report per day.
+
+It basically tweaks the orignial implementation of clocktable so that it creates
+one dataset per day.
+
+#+BEGIN: clockdaytable :tags "-notbill" :maxlevel 3 :scope file-with-archives :block 2017-03 :formatter my/format-daily-clocktables :properties ("issue") :inherit-props t :dump-data nil :stepskip0 t :fileskip0 t
+| issue | Headline            | Time   |      |      |
+|-------+---------------------+--------+------+------|
+|   ALL | *Total time*        | *3:14* |      |      |
+|-------+---------------------+--------+------+------|
+|  1234 | \_  Example task    |        | 1:06 |      |
+|  1234 | \_    Over midnight |        |      | 0:44 |
+|-------+---------------------+--------+------+------|
+|  1234 | \_  Example task    |        | 2:08 |      |
+|  1234 | \_    Over midnight |        |      | 0:54 |
+#+END:
+
+** Example task
+:PROPERTIES:
+:issue: 1234
+:work_type: Research
+:END:
+:LOGBOOK:
+CLOCK: [2017-03-04 Sat 18:28]--[2017-03-04 Sat 19:00] =>  0:32
+CLOCK: [2017-03-04 Sat 16:28]--[2017-03-04 Sat 17:10] =>  0:42
+CLOCK: [2017-03-03 Fri 18:42]--[2017-03-03 Fri 18:42] =>  0:00
+CLOCK: [2017-03-03 Fri 18:41]--[2017-03-03 Fri 18:41] =>  0:00
+CLOCK: [2017-03-03 Fri 18:40]--[2017-03-03 Fri 18:40] =>  0:00
+CLOCK: [2017-03-03 Fri 18:40]--[2017-03-03 Fri 18:40] =>  0:00
+CLOCK: [2017-03-03 Fri 12:16]--[2017-03-03 Fri 12:38] =>  0:22
+:END:
+
+Expectations:
+
+- [ ] Zero clock lines are ignored
+- [ ] Properties ~issue~, ~work_type~ and ~user~ are printed
+
+A Task should have the following properties set:
+
+- issue :: The issue tracker number.
+- work_type :: (optional) Specifies the type of work which is tracked on a
+               headline. For a small task which consists entirely of one type,
+               we track and set this on the task directly. Otherwise use one
+               sub-heading per work type.
+
+               The allowed values should be specified on the top level headline
+               "Tasks" or for the whole document. A reasonable default should be
+               specified on the top level headline "Tasks", so that this value
+               is inherited.
+- user :: Must be specified on the top level headline, so that all tasks inherit
+          this value.
+
+*** Over midnight
+:PROPERTIES:
+:work_type: Over Midnight
+:END:
+:LOGBOOK:
+CLOCK: [2017-03-03 Fri 23:16]--[2017-03-04 Fri 00:38] =>  1:22
+:END:
+
+One clock entry which crosses two days.
+
+**** Lower 2 level
+:PROPERTIES:
+:work_type: Test 2
+:END:
+:LOGBOOK:
+CLOCK: [2017-03-04 Fri 20:16]--[2017-03-04 Fri 20:32] =>  0:16
+:END:
+
+A sub entry. It must be included in the result.
