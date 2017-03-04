@@ -17,7 +17,7 @@ use the formatter ~botech/format-daily-clocklines~ for this.
 A clockline which spawns over midnight will be split up into two chunks, one per
 day.
 
-#+BEGIN: clockdaytable :tags "-notbill" :maxlevel 30 :scope file-with-archives :block 2017-03 :formatter botech/format-daily-clocklines :properties ("issue" "work_type" "user") :inherit-props t :dump-data nil :stepskip0 t :fileskip0 t
+#+BEGIN: clockdaytable :block 2017-03 :tags "-notbill" :maxlevel 30 :scope file-with-archives :formatter botech/format-daily-clocklines :properties ("issue" "work_type" "user") :inherit-props t :dump-data nil :stepskip0 t :fileskip0 t
 |     Date | Issue |    Start |      End | Duration | Activity      | Employee |
 |----------+-------+----------+----------+----------+---------------+----------|
 | 17-03-03 |  1234 | 12:16:00 | 12:38:00 | 00:22:00 | Research      | testuser |
