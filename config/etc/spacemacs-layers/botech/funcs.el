@@ -1,5 +1,5 @@
 (defun org-dblock-write:clockdaytable (params)
-  "Write the standard clocktable."
+  "Write a modified clocktable with a per day resolution"
   (message "Requiring org clock")
   (require 'org-clock)
   (setq params (org-combine-plists org-clocktable-defaults params))
