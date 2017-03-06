@@ -643,7 +643,8 @@ PROPNAME lets you set a custom text property instead of :org-clock-minutes."
      (if (consp tend) (setq tend (float-time tend)))
      (remove-text-properties (point-min) (point-max)
 			     `(,(or propname :org-clock-minutes) t
-			       :org-clock-force-headline-inclusion t))
+			       :org-clock-force-headline-inclusion t
+             :botech-clocklines t))
      (save-excursion
        (goto-char (point-max))
        (while (re-search-backward re nil t)
@@ -707,9 +708,6 @@ PROPNAME lets you set a custom text property instead of :org-clock-minutes."
 		 (put-text-property (point) (point-at-eol)
 				    (or propname :org-clock-minutes) time)
      (put-text-property (point) (point-at-eol) :botech-clocklines clocklines)
-     ;; reset clocklines, so that we can start to collect clocklines
-     ;; for the next headline
-     (setq clocklines nil)
 		 (when headline-filter
 		   (save-excursion
 		     (save-match-data
@@ -718,6 +716,9 @@ PROPNAME lets you set a custom text property instead of :org-clock-minutes."
 			  (point) (line-end-position)
 			  :org-clock-force-headline-inclusion t))))))
 	       (setq t1 0)
+         ;; reset clocklines, so that we can start to collect clocklines
+         ;; for the next headline
+         (setq clocklines nil)
 	       (cl-loop for l from level to (1- lmax) do
 			(aset ltimes l 0)))))))
        (setq org-clock-file-total-minutes (aref ltimes 0))))))

@@ -18,15 +18,15 @@ A clockline which spawns over midnight will be split up into two chunks, one per
 day.
 
 #+BEGIN: clockdaytable :block 2017-03 :tags "-notbill" :maxlevel 30 :scope file-with-archives :formatter botech/format-daily-clocklines :properties ("issue" "work_type" "user") :inherit-props t :dump-data nil :stepskip0 t :fileskip0 t
-|     Date | Issue |    Start |      End | Duration | Activity      | Employee |
-|----------+-------+----------+----------+----------+---------------+----------|
-| 17-03-03 |  1234 | 12:16:00 | 12:38:00 | 00:22:00 | Research      | testuser |
-| 17-03-03 |  1234 | 23:16:00 | 00:00:00 | 00:44:00 | Over Midnight | testuser |
-|----------+-------+----------+----------+----------+---------------+----------|
-| 17-03-04 |  1234 | 18:28:00 | 19:00:00 | 00:32:00 | Research      | testuser |
-| 17-03-04 |  1234 | 16:28:00 | 17:10:00 | 00:42:00 | Research      | testuser |
-| 17-03-04 |  1234 | 00:00:00 | 00:38:00 | 00:38:00 | Over Midnight | testuser |
-| 17-03-04 |  1234 | 20:16:00 | 20:32:00 | 00:16:00 | Test 2        | testuser |
+|       Date | Issue |    Start |      End | Duration | Activity      | Employee |
+|------------+-------+----------+----------+----------+---------------+----------|
+| 2017-03-03 |  1234 | 12:16:00 | 12:38:00 | 00:22:00 | Research      | testuser |
+| 2017-03-03 |  1234 | 23:16:00 | 00:00:00 | 00:44:00 | Over Midnight | testuser |
+|------------+-------+----------+----------+----------+---------------+----------|
+| 2017-03-04 |  1234 | 18:28:00 | 19:00:00 | 00:32:00 | Research      | testuser |
+| 2017-03-04 |  1234 | 16:28:00 | 17:10:00 | 00:42:00 | Research      | testuser |
+| 2017-03-04 |  1234 | 00:00:00 | 00:38:00 | 00:38:00 | Over Midnight | testuser |
+| 2017-03-04 |  1234 | 20:16:00 | 20:32:00 | 00:16:00 | Test 2        | testuser |
 #+END:
 
 *** Export daily reports
@@ -38,15 +38,17 @@ It basically tweaks the orignial implementation of clocktable so that it creates
 one dataset per day.
 
 #+BEGIN: clockdaytable :tags "-notbill" :maxlevel 3 :scope file-with-archives :block 2017-03 :formatter my/format-daily-clocktables :properties ("issue") :inherit-props t :dump-data nil :stepskip0 t :fileskip0 t
-| issue | Headline            | Time   |      |      |
-|-------+---------------------+--------+------+------|
-|   ALL | *Total time*        | *3:14* |      |      |
-|-------+---------------------+--------+------+------|
-|  1234 | \_  Example task    |        | 1:06 |      |
-|  1234 | \_    Over midnight |        |      | 0:44 |
-|-------+---------------------+--------+------+------|
-|  1234 | \_  Example task    |        | 2:08 |      |
-|  1234 | \_    Over midnight |        |      | 0:54 |
+| issue | Headline               |   Time |      |      |
+|-------+------------------------+--------+------+------|
+|   ALL | *Total time*           | *3:14* |      |      |
+|-------+------------------------+--------+------+------|
+|       | Tasks [2017-03-03 Fri] |   1:06 |      |      |
+|  1234 | \_  Example task       |        | 1:06 |      |
+|  1234 | \_    Over midnight    |        |      | 0:44 |
+|-------+------------------------+--------+------+------|
+|       | Tasks [2017-03-04 Sat] |   2:08 |      |      |
+|  1234 | \_  Example task       |        | 2:08 |      |
+|  1234 | \_    Over midnight    |        |      | 0:54 |
 #+END:
 
 ** Example task
@@ -103,3 +105,11 @@ CLOCK: [2017-03-04 Fri 20:16]--[2017-03-04 Fri 20:32] =>  0:16
 :END:
 
 A sub entry. It must be included in the result.
+
+***** Excluded                                                  :notbill:
+:PROPERTIES:
+:work_type: EXCLUDED
+:END:
+:LOGBOOK:
+CLOCK: [2017-03-04 Fri 20:10]--[2017-03-04 Fri 20:20] =>  0:10
+:END:
