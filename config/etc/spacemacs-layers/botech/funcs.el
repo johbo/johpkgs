@@ -231,7 +231,7 @@ from the dynamic block definition."
                "|"
                (if multifile "|" "")    ; free space for file name column?
                ;; day
-               (concat (format-time-string "%y-%m-%d" (nth 0 clockline)) "|")
+               (concat (format-time-string "%Y-%m-%d" (nth 0 clockline)) "|")
                ;; issue
                (or (cdr (assoc "issue" (nth 4 entry))) "") "|"
                ;; start - only time
