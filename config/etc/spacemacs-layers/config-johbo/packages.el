@@ -115,7 +115,8 @@ Additionally reposition the window."
   ;; Keys
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
     "ob" 'org-babel-demarcate-block
-    "oc" 'org-cut-special
+    "oc" 'org-copy-special
+    "od" 'org-cut-special
     "op" 'org-paste-special)
 
   ;; Agenda configuration
