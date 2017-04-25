@@ -33,6 +33,7 @@
    ;;        shell-default-position 'bottom)
    spell-checking
    syntax-checking
+   sql
    ;; version-control
    erc
    shell-scripts
