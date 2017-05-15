@@ -12,6 +12,9 @@
 
 (setq tramp-shell-prompt-pattern
       "\\(?:^\\|\r\\)[^]#$%>\n]*#?[]#$%>].* *\\(^[\\[[0-9;]*[a-zA-Z] *\\)*")
+;; HACK: Disable tramps inline compression to avoid "gzip: (stdin): unexpected
+;; end of file" for some files.
+(setq tramp-inline-compress-start-size 10000000)
 
 ;;(push '((d-mode . "stroustrup")) c-default-style)
 
