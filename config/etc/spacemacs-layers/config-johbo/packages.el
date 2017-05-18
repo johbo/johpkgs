@@ -125,7 +125,9 @@ Additionally reposition the window."
   (setq org-default-notes-file (concat org-directory "/capture.org"))
 
   ;; Export backends
-  (setq org-export-backends '(ascii html icalendar beamer md org odt))
+  (setq org-export-backends '(ascii html icalendar beamer md org odt reveal))
+  ;; TODO: Use a different value
+  (setq org-reveal-root "./reveal.js")
 
   ;; Link handling
   (setq org-id-link-to-org-use-id t)
