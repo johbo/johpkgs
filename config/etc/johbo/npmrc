@@ -1,0 +1,3 @@
+
+# Global installs into the home directory
+prefix = ${HOME}/.npm-packages

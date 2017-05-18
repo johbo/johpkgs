@@ -3,13 +3,15 @@
     ["~/.aspell.conf", "~/.nix-profile/etc/johbo/aspell.conf"],
     ["~/.gitconfig", "~/.nix-profile/etc/johbo/gitconfig"],
     ["~/.hgrc", "~/.nix-profile/etc/johbo/hgrc"],
-    ["~/.profile", "~/.nix-profile/etc/johbo/profile"]
+    ["~/.profile", "~/.nix-profile/etc/johbo/profile"],
+    ["~/.npmrc", "~/.nix-profile/etc/johbo/npmrc"]
   ],
   "create_as_copy": [
     ["~/.emacs", "~/.nix-profile/etc/johbo/dot_emacs"]
   ],
   "directories": [
     "~/bin",
+    "~/.npm-packages",
     "~/var/log",
     "~/var/run",
     "~/tmp"
