@@ -41,6 +41,6 @@
    ansible
 
    (osx :variables
-        mac-right-option-modifier nil)
+        osx-right-option-as 'none)
    botech
    ))
