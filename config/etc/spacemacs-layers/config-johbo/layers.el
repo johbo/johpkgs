@@ -35,7 +35,7 @@
    spell-checking
    syntax-checking
    sql
-   ;; version-control
+   version-control
    erc
    shell-scripts
    ansible
