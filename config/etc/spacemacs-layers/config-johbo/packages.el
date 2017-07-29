@@ -130,7 +130,7 @@ Additionally reposition the window."
   (setq org-reveal-root "./reveal.js")
 
   ;; Link handling
-  (setq org-id-link-to-org-use-id t)
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 
   ;; Capturing
   (setq org-capture-templates
