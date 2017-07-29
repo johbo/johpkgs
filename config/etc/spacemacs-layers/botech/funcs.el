@@ -66,6 +66,9 @@
         (setq p1 (plist-put p1 :tstart (format-time-string
                                         (org-time-stamp-format nil t)
                                         (seconds-to-time (max tsb ts)))))
+        (setq p1 (plist-put p1 :tstart-csv (format-time-string
+                                            "%Y-%m-%d"
+                                            (seconds-to-time (max tsb ts)))))
         (setq p1 (plist-put p1 :tend (format-time-string
                                       (org-time-stamp-format nil t)
                                       (seconds-to-time (min te (setq tsb (+ tsb step)))))))
@@ -79,7 +82,9 @@
                 (with-current-buffer (find-buffer-visiting file)
                   (save-excursion
                     (save-restriction
-                      (push (botech//org-clock-get-table-data (plist-get p1 :tstart) p1) tbls))))))
+                      (push (botech//org-clock-get-table-data (plist-get p1 :tstart-csv) p1) tbls))))))
+                    ;; (save-restriction
+                    ;;   (push (botech//org-clock-get-table-data (format-time-string "%Y-%m-%d" (seconds-to-time (max tsb ts))) p1) tbls))))))
           ;; Just from the current file
           (save-restriction
             ;; get the right range into the restriction
@@ -370,6 +375,7 @@ from the dynamic block definition."
     (insert-before-markers
      "|"                              ; table line starter
      (if multifile (concat (nth 1 lwords) "|") "")  ; file column, maybe
+     "day|"
      (if level-p   (concat (nth 2 lwords) "|") "")  ; level column, maybe
      (if timestamp (concat (nth 3 lwords) "|") "")  ; timestamp column, maybe
      (if properties (concat (mapconcat 'identity properties "|") "|") "") ;properties columns, maybe
@@ -380,8 +386,8 @@ from the dynamic block definition."
     (insert-before-markers
      "|-\n"                            ; a hline
      "|"                               ; table line starter
-     (if multifile (concat "| " (nth 6 lwords) " ") "")
-                                        ; file column, maybe
+     "|"
+     "|"
      (if level-p   "|"      "")        ; level column, maybe
      (if timestamp "|"      "")        ; timestamp column, maybe
      (if properties (make-string (length properties) ?|) "")  ; properties columns, maybe
@@ -423,6 +429,8 @@ from the dynamic block definition."
             (insert-before-markers
              "|"                      ; start the table line
              (if multifile "|" "")    ; free space for file name column?
+             ;; day
+             tbl-day "|"
              (if level-p (format "%d|" (car entry)) "")   ; level, maybe
              (if timestamp (concat (nth 2 entry) "|") "") ; timestamp, maybe
              (if properties
@@ -431,7 +439,7 @@ from the dynamic block definition."
                    (lambda (p) (or (cdr (assoc p (nth 4 entry))) ""))
                    properties "|") "|") "")  ;properties columns, maybe
              (if indent (org-clocktable-indent-string level) "") ; indentation
-             hlc headline hlc hlts "|"                                ; headline
+             hlc headline hlc "|"                                ; headline
              (make-string (min (1- ntcol) (or (- level 1))) ?|)
                                         ; empty fields for higher levels
              hlc (org-minutes-to-clocksum-string (nth 3 entry)) hlc ; time
