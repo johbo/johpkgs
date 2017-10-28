@@ -1,5 +1,8 @@
 NIX_LINK=$HOME/.nix-profile
 
+# TODO: Avoid that the nix-daemon file screws things up
+__ETC_PROFILE_NIX_SOURCED=1
+
 # Triggers loading etc/profile.d
 if [ -d $NIX_LINK/etc/profile.d ]
 then
