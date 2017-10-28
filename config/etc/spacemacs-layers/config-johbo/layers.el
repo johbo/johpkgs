@@ -2,7 +2,8 @@
 (configuration-layer/declare-layers
  '(
    (org :variables
-        org-enable-reveal-js-support t)
+        org-enable-reveal-js-support t
+        org-want-todo-bindings t)
    (elfeed :variables
            rmh-elfeed-org-files (list "~/n/rssfeeds.org"))
    jabber
