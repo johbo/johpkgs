@@ -35,7 +35,7 @@ export LANG=en_US.UTF-8
 
 
 # Postgres development setup
-export PGDATA=$HOME/var/lib/postgresql/9.5
+export PGDATA=$HOME/var/lib/postgresql/9.6
 
 
 # Prompt tweaks
