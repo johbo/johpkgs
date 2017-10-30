@@ -28,8 +28,8 @@ let
         emacs
 
         # completion tools for D
-        pkgs.emacsPackagesNg.ac-dcd
-        pkgs.dcd
+        # pkgs.emacsPackagesNg.ac-dcd
+        # pkgs.dcd
 
         pkgs.emacsPackagesNg.flycheck
         pkgs.emacsPackagesNg.magit
@@ -38,11 +38,9 @@ let
         emacsPackages.autoComplete
         emacsPackages.d
         emacsPackages.feature-mode
-        emacsPackages.flx-ido
-        emacsPackages.jedi
+        # emacsPackages.jedi
         # TODO: Find out why jedi does not fill this in automatically
-        emacsPackages.jedi-epcserver
-        emacsPackages.monky
+        # emacsPackages.jedi-epcserver
         emacsPackages.sr-speedbar
         emacsPackages.yaml
         emacsPackages.yasnippet
@@ -64,18 +62,19 @@ let
         pkgs.nix-serve
         pkgs.nixops
 
-        pkgs.pylint
+        # pkgs.pylint
         # TODO: priority
         # pkgs.python2
-        flake8
+        # flake8
         pkgs.python2Packages.jedi
         pkgs.python2Packages.pip
         pkgs.python2Packages.supervisor
 
-        pkgs.python3
+        # pkgs.python3
         pkgs.python3Packages.hovercraft
 
         pkgs.pythonDocs.html.python27
+        # pkgs.pythonDocs.html.python36
 
       ];
 
