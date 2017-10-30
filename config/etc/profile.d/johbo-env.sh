@@ -20,6 +20,11 @@ fi
 
 export NIX_PATH=ssh-config-file=$HOME/etc/ssh/nix-default-conf:$NIX_PATH
 
+# Remote building support
+export NIX_BUILD_HOOK=${NIX_LINK}/libexec/nix/build-remote.pl
+export NIX_REMOTE_SYSTEMS=${HOME}/etc/nix/remote-systems.conf
+export NIX_CURRENT_LOAD=${HOME}/tmp/nix-load
+
 
 if [ -n "$foundEmacs" ]
 then
