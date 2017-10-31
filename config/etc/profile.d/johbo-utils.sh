@@ -8,6 +8,16 @@
 [ -z "$PS1" ] && return
 
 
+# Nix
+function nix-build-linux() {
+    nix-build \
+        --arg pkgs '(import <nixpkgs> { system="x86_64-linux"; })' \
+        $@
+}
+
+export -f nix-build-linux
+
+
 
 # Emacs shortcuts
 function emacs() {
