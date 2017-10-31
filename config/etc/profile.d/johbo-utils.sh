@@ -9,13 +9,13 @@
 
 
 # Nix
-function nix-build-linux() {
+function nix_build_linux() {
     nix-build \
         --arg pkgs '(import <nixpkgs> { system="x86_64-linux"; })' \
         $@
 }
 
-export -f nix-build-linux
+export -f nix_build_linux
 
 
 
