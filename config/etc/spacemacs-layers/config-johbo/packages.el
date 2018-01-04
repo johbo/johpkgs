@@ -111,6 +111,11 @@ Additionally reposition the window."
     )
   )
 
+(defun config-johbo/post-init-magit ()
+  ;; Workaround image display issues on osx
+  (setq magit-revision-use-gravatar-kludge t)
+  )
+
 (defun config-johbo/post-init-org ()
   ;; Keys
   (spacemacs/set-leader-keys-for-major-mode 'org-mode
