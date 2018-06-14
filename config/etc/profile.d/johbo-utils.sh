@@ -29,7 +29,7 @@ function ee() {
 }
 
 function eo() {
-    $VISUAL -n $@
+    $VISUAL -c -n $@
 }
 
 export -f emacs ee eo
