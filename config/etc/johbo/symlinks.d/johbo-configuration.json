@@ -4,6 +4,7 @@
     ["~/.gitconfig", "~/.nix-profile/etc/johbo/gitconfig"],
     ["~/.hgrc", "~/.nix-profile/etc/johbo/hgrc"],
     ["~/.profile", "~/.nix-profile/etc/johbo/profile"],
+    ["~/.zprofile", "~/.nix-profile/etc/johbo/profile"],
     ["~/.npmrc", "~/.nix-profile/etc/johbo/npmrc"]
   ],
   "create_as_copy": [
