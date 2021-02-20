@@ -17,13 +17,3 @@ then
         source $file
     done
 fi
-
-
-# Load bash completion
-if [ -d $NIX_LINK/etc/bash_completion.d ]
-then
-    for file in $NIX_LINK/etc/bash_completion.d/*
-    do
-        source $file
-    done
-fi
