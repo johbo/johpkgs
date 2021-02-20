@@ -8,7 +8,6 @@
     ["~/.npmrc", "~/.nix-profile/etc/johbo/npmrc"]
   ],
   "create_as_copy": [
-    ["~/.emacs", "~/.nix-profile/etc/johbo/dot_emacs"]
   ],
   "directories": [
     "~/bin",
