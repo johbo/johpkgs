@@ -12,7 +12,6 @@ then
 fi
 
 # Dispatch to nix managed configuration files
-NIX_LINK=$HOME/.nix-profile
 
 if [ -e $NIX_LINK/etc/johbo/bootstrap.sh ]
 then
