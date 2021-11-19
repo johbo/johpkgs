@@ -1,6 +1,11 @@
 {
     "symlinks": [
         ["~/Library/LaunchAgents/johbo.supervisord.plist",
-         "~/.nix-profile/Library/LaunchAgents/johbo.supervisord.plist"]
+         "~/.nix-profile/Library/LaunchAgents/johbo.supervisord.plist"],
+        ["~/Library/Preferences/FreeCAD/Arch/profiles.csv",
+         "~/.nix-profile/etc/johbo/freecad_profiles.csv"]
+    ],
+    "directories": [
+      "~/Library/Preferences/FreeCAD/Arch"
     ]
 }
