@@ -36,9 +36,9 @@ class SymlinkChecker:
 
     def run(self):
         for symlink_config in self.symlink_configs():
+            self.apply_directories(symlink_config)
             self.check_and_fix_symlinks(symlink_config)
             self.apply_create_as_copy(symlink_config)
-            self.apply_directories(symlink_config)
 
     def symlink_configs(self):
         symlink_d = self._expand_path(self._config.symlink_d)
