@@ -13,6 +13,8 @@ fi
 
 # Dispatch to nix managed configuration files
 
+# TODO: NIX_LINK is unset by the sourced file above
+NIX_LINK=$HOME/.nix-profile
 if [ -e $NIX_LINK/etc/johbo/bootstrap.sh ]
 then
     source $NIX_LINK/etc/johbo/bootstrap.sh
