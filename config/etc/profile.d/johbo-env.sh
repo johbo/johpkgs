@@ -44,6 +44,3 @@ export PGDATA=$HOME/var/lib/postgresql/9.6
 
 
 # Prompt tweaks
-
-# Git repositories
-PS1='\n\[\e[0;34m\]\u@\h: \e[0;36m\w \[\e[0;33m\]$(__git_ps1 "%s")\[\e[0m\]\n$ '
