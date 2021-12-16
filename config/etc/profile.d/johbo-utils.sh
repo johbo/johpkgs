@@ -7,6 +7,13 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+if [ -n "$ZSH_VERSION" ]
+then
+    _export_parameter=""
+else
+    _export_parameter="-f"
+fi
+
 
 # Nix
 function nix_build_linux() {
@@ -15,7 +22,7 @@ function nix_build_linux() {
         $@
 }
 
-export -f nix_build_linux
+export $_export_parameter nix_build_linux
 
 
 
@@ -32,7 +39,7 @@ function eo() {
     $VISUAL -c -n $@
 }
 
-export -f emacs ee eo
+export $_export_parameter emacs ee eo
 
 
 
@@ -50,7 +57,7 @@ function hgus() {
     hg up -r `hg id -r stable -i upstream`
 }
 
-export -f hgcl hgud hgus
+export $_export_parameter hgcl hgud hgus
 
 
 # git version control
@@ -71,7 +78,7 @@ alias gfu='git fetch -v upstream; git fetch -v origin'
 
 alias gserve='echo "on port 9418"; git daemon --reuseaddr --base-path=. --export-all --verbose'
 
-export -f gbl gst
+export $_export_parameter gbl gst
 
 
 
