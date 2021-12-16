@@ -8,7 +8,7 @@ NIX_LINK=$HOME/.nix-profile
 
 if [ -e $NIX_LINK/etc/profile.d/nix.sh ]
 then
-    . $NIX_LINK/etc/profile.d/nix.sh
+    source $NIX_LINK/etc/profile.d/nix.sh
 fi
 
 # Dispatch to nix managed configuration files
