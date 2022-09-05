@@ -79,6 +79,8 @@ let
 #        pkgs.pythonDocs.html.python27
         # pkgs.pythonDocs.html.python36
 
+        pkgs.python3Packages.python-lsp-server
+
       ];
 
       passthru = {
