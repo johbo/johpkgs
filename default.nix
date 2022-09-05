@@ -31,19 +31,20 @@ let
         # pkgs.emacsPackagesNg.ac-dcd
         # pkgs.dcd
 
-        pkgs.emacsPackagesNg.flycheck
-        pkgs.emacsPackagesNg.magit
-        pkgs.emacsPackagesNg.multiple-cursors
-        pkgs.emacsPackagesNg.projectile
-        emacsPackages.autoComplete
-        emacsPackages.d
-        emacsPackages.feature-mode
-        # emacsPackages.jedi
-        # TODO: Find out why jedi does not fill this in automatically
-        # emacsPackages.jedi-epcserver
-        emacsPackages.sr-speedbar
-        emacsPackages.yaml
-        emacsPackages.yasnippet
+# TODO: Check if emacs packages do make any sense if we use spacemacs
+#        pkgs.emacsPackagesNg.flycheck
+#        pkgs.emacsPackagesNg.magit
+#        pkgs.emacsPackagesNg.multiple-cursors
+#        pkgs.emacsPackagesNg.projectile
+#        emacsPackages.autoComplete
+#        emacsPackages.d
+#        emacsPackages.feature-mode
+#        # emacsPackages.jedi
+#        # TODO: Find out why jedi does not fill this in automatically
+#        # emacsPackages.jedi-epcserver
+#        emacsPackages.sr-speedbar
+#        emacsPackages.yaml
+#        emacsPackages.yasnippet
 
         pkgs.aspell
         pkgs.aspellDicts.de
@@ -58,22 +59,24 @@ let
         pkgs.watchman
         # pkgs.xournal
 
-        pkgs.nix-repl
         pkgs.nix-serve
-        pkgs.nixops
+# TODO: outdated nixops
+#        pkgs.nixops
 
         # pkgs.pylint
         # TODO: priority
         # pkgs.python2
         # flake8
-        pkgs.python2Packages.jedi
-        pkgs.python2Packages.pip
-        pkgs.python2Packages.supervisor
+# TODO: Check if any py2 packages still needed.
+#         pkgs.python2Packages.jedi
+#         pkgs.python2Packages.pip
+#         pkgs.python2Packages.supervisor
 
         # pkgs.python3
-        pkgs.python3Packages.hovercraft
+# TODO: outdated version
+#        pkgs.python3Packages.hovercraft
 
-        pkgs.pythonDocs.html.python27
+#        pkgs.pythonDocs.html.python27
         # pkgs.pythonDocs.html.python36
 
       ];
@@ -98,7 +101,7 @@ let
       inherit (pkgs.pythonPackages)
         argparse;
       melpaBuild = import <nixpkgs/pkgs/build-support/emacs/melpa.nix> {
-        inherit lib stdenv fetchurl emacs texinfo;
+        inherit lib stdenv fetchFromGitHub fetchurl emacs texinfo;
       };
     };
 
