@@ -6,7 +6,7 @@
         org-want-todo-bindings t)
    (elfeed :variables
            rmh-elfeed-org-files (list "~/n/rssfeeds.org"))
-   jabber
+   ;; jabber
    csv
    ruby
    php
