@@ -1,24 +1,16 @@
 (defconst config-johbo-packages
   '(
-    editorconfig
     flycheck
     helm
     imenu-list
     jabber
     org
-    ox-jira
     ox-rst
     python
-    rst
+    ;; rst
     ;; sr-speedbar
     ))
 
-(defun config-johbo/init-editorconfig ()
-  (use-package editorconfig
-    :config
-    (editorconfig-mode 1)
-    )
-  )
 
 (defun config-johbo/post-init-flycheck ()
   (setq flycheck-flake8rc "~/.nix-profile/etc/johbo/flake8rc")
@@ -134,6 +126,14 @@ Additionally reposition the window."
   ;; TODO: Use a different value
   (setq org-reveal-root "./reveal.js")
 
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "NEXT(n)" "WAIT(w@/!)" "DELEGATED(x@/!)" "SOMEDAY(s)" "PROJECT(p)"
+                    "|" "DONE(d!)" "CANCELED(c@)")))
+
+  ;; Timestamp and logging notes into a specific drawer LOGBOOK.
+  ;; Otherwise they would clash with the content of the item.
+  (setq org-log-into-drawer t)
+
   ;; Link handling
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id)
 
@@ -175,14 +175,9 @@ Additionally reposition the window."
   (setq org-startup-indented t)
   )
 
-(defun config-johbo/init-ox-jira ()
-  (spacemacs|use-package-add-hook org :post-config (require 'ox-jira)))
-
 (defun config-johbo/init-ox-rst ()
   (spacemacs|use-package-add-hook org :post-config (require 'ox-rst)))
 
 (defun config-johbo/post-init-python ()
   (setq python-fill-docstring-style (quote django))
   )
-
-(defun config-johbo/init-rst ())
