@@ -30,6 +30,11 @@ env?.?/
 .\#*
 .ropeproject/
 
+# FreeCAD files
+*.FCBak
+# Latest N versions, they have a number as a suffic appended
+*.FCStd?
+
 # Vagrant
 /.vagrant/
 
