@@ -38,6 +38,7 @@
    sphinx
    syntax-checking
    sql
+   terraform
    version-control
    erc
    shell-scripts
