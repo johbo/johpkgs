@@ -9,8 +9,8 @@
    ;; jabber
    docker
    csv
-   ruby
-   php
+   ;; ruby
+   ;; php
    auto-completion
    ;; better-defaults
    emacs-lisp
