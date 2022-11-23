@@ -58,3 +58,7 @@
     (add-hook 'erc-mode-hook #'spacemacs-layouts/add-chat-buffer-to-persp)
     (erc-tls)
     ))
+
+;; Workaround Markdown and help interop issue, 2022-11-19
+;; See https://github.com/jrblevin/markdown-mode/issues/578
+(setq markdown-nested-imenu-heading-index nil)
