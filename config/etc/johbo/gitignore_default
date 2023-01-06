@@ -29,6 +29,7 @@ env?.?/
 \#*#
 .\#*
 .ropeproject/
+.projectile
 
 # FreeCAD files
 *.FCBak
