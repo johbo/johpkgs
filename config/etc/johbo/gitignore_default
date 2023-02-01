@@ -42,3 +42,7 @@ env?.?/
 
 # Other tools
 Guardfile
+
+# Drawio
+.$*.drawio.bkp
+.$*.drawio.dtmp
