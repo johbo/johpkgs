@@ -28,6 +28,7 @@
    typescript
    nixos
    react
+   vue
    yaml
    html
    restructuredtext
