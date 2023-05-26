@@ -2,8 +2,9 @@
   '(
     flycheck
     helm
+    helm-ag
     imenu-list
-    jabber
+    ;; jabber
     org
     ox-rst
     python
@@ -18,6 +19,10 @@
 
 (defun config-johbo/post-init-helm ()
   (setq helm-buffer-max-length 70)
+  )
+
+(defun config-johbo/post-init-helm-ag ()
+  (setq helm-ag-command-option "--hidden")
   )
 
 (defun config-johbo/post-init-imenu-list ()
