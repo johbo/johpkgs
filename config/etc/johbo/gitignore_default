@@ -44,5 +44,5 @@ env?.?/
 Guardfile
 
 # Drawio
-.$*.drawio.bkp
-.$*.drawio.dtmp
+.$*.bkp
+.$*.dtmp
