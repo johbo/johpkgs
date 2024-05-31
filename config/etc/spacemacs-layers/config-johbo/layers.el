@@ -16,6 +16,7 @@
    emacs-lisp
    git
    markdown
+   multiple-cursors
    d
    ;; This screws with my holy org files
    ;; See https://github.com/syl20bnr/emacs-emoji-cheat-sheet-plus/issues/5
