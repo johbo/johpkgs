@@ -10,10 +10,10 @@
   gpgSign = true
 
 [tag]
-  gpgSign = true
+  # gpgSign = true
 
 [push]
-  gpgSign = if-asked
+  # gpgSign = if-asked
 
 [color]
   branch = auto
