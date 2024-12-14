@@ -6,7 +6,7 @@
     imenu-list
     ;; jabber
     org
-    ox-rst
+    ;; ox-rst
     python
     ;; rst
     ;; sr-speedbar
