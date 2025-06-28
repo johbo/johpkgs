@@ -5,7 +5,7 @@ let
 
 in
 stdenv.mkDerivation {
-  name = "johbo-configuration";
+  name = "johbo-config";
   src = ./.;
 
   # TODO: Has a few dependencies:
