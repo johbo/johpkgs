@@ -6,6 +6,9 @@
   email = johannes@bornhold.name
   signingkey = CC0460EF63611506
 
+[init]
+  defaultBranch = main
+
 [commit]
   gpgSign = true
 
