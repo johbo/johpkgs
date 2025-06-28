@@ -46,3 +46,6 @@ Guardfile
 # Drawio
 .$*.bkp
 .$*.dtmp
+
+# AI experimentation
+.aider*
