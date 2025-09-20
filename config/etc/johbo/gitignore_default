@@ -37,6 +37,10 @@ env?.?/
 # Latest N versions, they have a number as a suffic appended
 *.FCStd?
 
+## LibreOffice
+# Lock files
+.~lock.*#
+
 # Vagrant
 /.vagrant/
 
