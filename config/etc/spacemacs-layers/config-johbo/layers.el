@@ -1,6 +1,12 @@
 
 (configuration-layer/declare-layers
  '(
+   ;; Spacemacs core configuration
+   (spacemacs-layouts :variables
+                      ;; Remove buffers when closing a perspective
+                      persp-autokill-buffer-on-remove 'kill-weak)
+
+   ;; Other buffers
    (org :variables
         org-enable-reveal-js-support t
         org-want-todo-bindings t)
